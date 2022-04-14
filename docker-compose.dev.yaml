@@ -19,20 +19,24 @@ services:
     ports: 
       - 3000:3000
     environment: 
-      - DB_NAME=habits
-      - DB_CONNECTION=mongodb://hiho:habitspass@db:27017
+      - PGUSER=user
+      - PGHOST=db
+      - PGPASSWORD=dataforSQLpassword
+      - PGDATABASE=dataforSQL
+      - PGPORT=5432
+      - NODE_ENV=development
     depends_on:
       - db
     command: bash -c "npm install && npm run start"
   db:
-    container_name: dev_db
+    image: postgres:latest
     volumes:
-      - "dbdata:/var/lib/mongodb/data"
-      - "./db/seeds.js:/docker-entrypoint-initdb.d/seeds.js:ro"
+      - "dbdata:/var/lib/postgresql/data"
+      - "./db:/docker-entrypoint-initdb.d/:ro"
     environment: 
-      - MONGO_INITDB_ROOT_USERNAME=hiho
-      - MONGO_INITDB_DATABASE=hihoclusterandaway
-      - MONGO_INITDB_ROOT_PASSWORD=habitspass
+      - POSTGRES_DB=dataforSQL
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=dataforSQLpassword
 volumes:
   dbdata:
 networks: 
