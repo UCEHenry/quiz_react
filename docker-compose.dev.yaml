@@ -12,10 +12,10 @@ services:
         source: ./client
         target: /code
     command: [ "http-server" ]
-  api:
+  server:
     build:
       dockerfile: Dockerfile
-    container_name: dev_api
+    container_name: dev_server
     ports: 
       - 3000:3000
     environment: 
