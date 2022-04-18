@@ -1,5 +1,5 @@
 import React from 'react'
-import heroImage from '../../assets/placeholder.jpg'
+import heroImage from '../../assets/images/placeholder.jpg'
 import Button from 'react-bootstrap/Button'
 import './style.css'
 export const Jumbotron = () => {
