@@ -1,11 +1,11 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card'
-export const PlayerCard = () => {
-
+import { Card, Row } from 'react-bootstrap/'
+export const PlayerCard = ({ player }) => {
+    console.log(player)
     return (
-        <Card>
-            <Card.Header>Player Name</Card.Header>
-            <Card.Body>Points</Card.Body>
+        <Card style={{ width: '18rem' }} className="text-start">
+            <Card.Title>{player.name}</Card.Title>
+            <Card.Body>{player.points}</Card.Body>
         </Card>
     )
 }
