@@ -8,9 +8,8 @@ describe('Jumbotron', () => {
     })
 
     test('renders navbar with multiple links',  () => {
-        const links = screen.queryAllByRole('a')
-        const HomeLink = links[0]
-        expect(HomeLink.textContent).toContain('Home')
+        const linkHomeElement = screen.getByText(/Home/i);
+        expect(linkHomeElement).toBeInTheDocument();
     })
 
 })
