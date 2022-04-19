@@ -23,9 +23,11 @@ class User {
     static createUser(username){
         return new Promise (async (resolve, reject) => {
             try {
-                await db.query(`INSERT INTO users (username)
-                                    VALUES ($1);`, [ username ]);
-                resolve ("User created");
+                let addUser = await db.query(`INSERT INTO users (username)
+                                    VALUES ($1)
+                                    RETURNING *;`, [ username ]);
+                let newUser = addUser.rows[0];
+                resolve (newUser);
             } catch (err) {
                 reject('User not found');
             }
@@ -50,10 +52,12 @@ class User {
     static updateUserScore(username, score){
         return new Promise (async (resolve, reject) => {
             try {
-                await db.query(`UPDATE users
+                let updateScore = await db.query(`UPDATE users
                                     SET score = $1
-                                    WHERE username = $2;`, [ username, score ]);
-                resolve (`${username} score has been updated to: ${score}`);
+                                    WHERE username = $2
+                                    RETURNING *;`, [ score, username ]);
+                let newScore = updateScore.rows[0];
+                resolve (newScore);
             } catch (err) {
                 reject('User not found');
             }

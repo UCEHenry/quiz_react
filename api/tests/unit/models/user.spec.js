@@ -37,5 +37,4 @@ describe('User', () => {
             expect(result).toBeInstanceOf(User)
         })
     });
-}
-)
+})

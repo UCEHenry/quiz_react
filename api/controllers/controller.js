@@ -21,8 +21,8 @@ async function getUser(req, res) {
 
 async function createNewUser(req, res) {
     try{
-        const username = req.body.username
-        const user = await User.createUser(username)
+        const username = req.body.username;
+        const user = await User.createUser(username);
         res.status(201).json(user)
     } catch (err) {
         res.status(422).json({err})
@@ -31,7 +31,7 @@ async function createNewUser(req, res) {
 
 async function updateScore(req, res) {
     try{
-        const username = req.params.username
+        const username = req.body.username
         const score = req.body.score
         const user = await User.updateUserScore(username, score)
         res.status(200).json(user)
