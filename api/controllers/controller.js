@@ -2,10 +2,10 @@ const User = require('../models/model')
 
 async function getAll(req, res) {
     try{
-        const userData = await User.all(); 
+        const userData = await User.all; 
         res.status(200).json(userData)
     } catch (err) {
-        res.status(404).json({err})    
+        res.status(404).json({err})
     }
 }
 

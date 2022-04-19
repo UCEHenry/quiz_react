@@ -12,7 +12,7 @@ class User {
             try {
                 console.log(db);
                 const result = await db.query(`SELECT * FROM users;`)
-                const users = result.rows.map(username => ({ id: username.id, username: username.username, score: username.score }))
+                const users = result.rows.map(user => ({ id: user.id, username: user.username, score: user.score }))
                 resolve(users);
             } catch (err) {
                 reject("Error retrieving users")
