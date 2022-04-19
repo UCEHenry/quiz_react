@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { PlayerCard, QuestionCard } from '../../components'
-import { CardGroup, Row, Col, Container } from 'react-bootstrap'
-import quizData from '../../assets/testData/questions.json'
+import { CardGroup, Row, Col, Container, Button } from 'react-bootstrap'
+import quizDataResp from '../../assets/testData/questions.json'
 import axios from 'axios'
 
 export const QuizPage = () => {
-    const [players, setPlayers] = useState([{ 'id': 0, 'name': 'Idris', 'points': 0 }, { 'id': 1, 'name': 'Paul', 'points': 0 }, { 'id': 2, 'name': 'Henry', 'points': 0 }, { 'id': 3, 'name': 'Marco', 'points': 0 }])
+    const [players, setPlayers] = useState([{ 'id': 0, 'name': 'Idris', 'points': 0, 'isReady': false }, { 'id': 1, 'name': 'Paul', 'points': 0, 'isReady': false }, { 'id': 2, 'name': 'Henry', 'points': 0, 'isReady': false }, { 'id': 3, 'name': 'Marco', 'points': 0, 'isReady': false }])
     const [questionsLeft, setQuestionsLeft] = useState([])
-    const [questionToAnswer, setQuestionToAnswer] = useState()
+    const [questionToAnswer, setQuestionToAnswer] = useState('')
+    const [paryReady, setPartyReady] = useState(false)
     
-    const questionIdGen = (quizData) => {
+    
+    const quizDataFormatter = (quizData) => {
+        let formattedQuestionsList = [];
         for (let i = 0; i< quizData['results'].length; i++) {
-            quizData['results'][i]['id'] = i
+            const qData = quizData['results'][i]
+            qData['id'] = i
+            formattedQuestionsList.push({'id': qData['id'],'question':qData['question'], "answers": answerRandomiser(qData)})
         }
-        return quizData['results']
+        setQuestionsLeft(formattedQuestionsList)
     }
 
-    // const getData = async () => {
-    //     try {
-    //         const resp = await axios.get('http://localhost:8080/client/assets/testData/questions.json')
-    //         console.log(resp.data)
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
 
     const answerRandomiser = (question) => {
         const answers = question['incorrect_answers'].concat([question['correct_answer']]);
@@ -37,38 +34,31 @@ export const QuizPage = () => {
         return answers
     }
 
-    // {id: id, question: question, answers: [a1,a2,a3,a4]}
-    const quizQuestions = async(quizData) => {
-        let questionsList = [];
-        for (const questionData of quizData) {
-            questionsList.push({'id': questionData['id'],'question':questionData['question'], "answers": answerRandomiser(questionData)})
-        }
-        setQuestionsLeft(questionsList)
+    // const answerCheck = (questionId, playerAnswer, quizData) => {
+    //     const correctAnswer = quizData.find((item) => item['id'] === questionId)['correct_answer']
+    //     if (playerAnswer === correctAnswer) {
+    //         console.log("1 point")
+    //     } else {
+    //         console.log("-1 point")
+    //     }
+    // }
+
+    const handlePartyReady = () => {
+        // const readyCounter = 0
+        // for (const player of players) {
+        //     if (player.isReady) {
+        //         readyCounter ++
+        //     }
+        // }
+        // if (readyCounter === players.length) {
+        //     setPartyReady(true)
+        // }
+        setPartyReady(true)
     }
 
-    const answerCheck = (questionId, playerAnswer, quizData) => {
-        const correctAnswer = quizData.find((item) => item['id'] === questionId)['correct_answer']
-        if (playerAnswer === correctAnswer) {
-            console.log("1 point")
-        } else {
-            console.log("-1 point")
-        }
-    }
 
-    const testfunc = async() => {
-        // console.log("before: ",quizData)
-        const editedQuizData = questionIdGen(quizData)
-        // console.log("after: ",editedQuizData)
-        quizQuestions(editedQuizData)
-        console.log('test')
-        console.log("Questions left",{questionsLeft})
-        // console.log(question)
-        // setQuestion(question[0])
-        // answerCheck(questions[0]['id'], questions[0]['answers'][0], editedQuizData)
-    }
     useEffect(() => {
-        // setQuestionToAnswer(questionsLeft[Math.random(0,questionsLeft.length - 1)])
-        testfunc()
+        quizDataFormatter(quizDataResp)
     }, [])
 
     return (
@@ -84,12 +74,13 @@ export const QuizPage = () => {
                 ))}
             </Row>
             </Col>
-            <Col >
-                <QuestionCard  question={questionsLeft[0]}/>
+
+            <Col>
+                {paryReady ? <QuestionCard  question={questionsLeft[0]}/>: <h2>ready up</h2>}
             </Col>
 
             </Row>
-
+            <Button onClick={handlePartyReady}>test readyup</Button>
         </section>
     )
 }
