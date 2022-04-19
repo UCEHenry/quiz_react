@@ -78,19 +78,6 @@ console.log(apiUrl);
     // }
 
     const handlePartyReady = () => {
-<<<<<<< HEAD
-        const readyCounter = 0
-        for (const player of players) {
-            if (player.isReady) {
-                readyCounter++
-            }
-        }
-        console.log("plays ready: ", readyCounter)
-        if (readyCounter === players.length) {
-            setPartyReady(true)
-        }
-        // setPartyReady(true)
-=======
         // const readyCounter = 0
         // for (const player of players) {
         //     if (player.isReady) {
@@ -102,7 +89,6 @@ console.log(apiUrl);
         //     setPartyReady(true)
         // }
         setPartyReady(true)
->>>>>>> 7302ededa5ad43e25b396b606fd36661b5f69146
     }
 
     useEffect(() => {
@@ -152,15 +138,9 @@ console.log(apiUrl);
                     </Row>
                 </Col>
 
-<<<<<<< HEAD
-                <Col>
-                    {partyReady ? <QuestionCard question={questionsLeft[0]} /> : <h2>ready up</h2>}
-                </Col>
-=======
             <Col>
                 {partyReady ? <QuestionCard  question={response.results[questionIndex].question}/>: <h2>ready up</h2>}
             </Col>
->>>>>>> 7302ededa5ad43e25b396b606fd36661b5f69146
 
             </Row>
             <Button onClick={handlePartyReady}>test readyup</Button>
