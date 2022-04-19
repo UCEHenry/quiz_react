@@ -32,4 +32,5 @@ export const handleScoreChange = payload => ({
 });
 
 export const togglePlayerReady = playerId => ({type: 'TOGGLE_READY', payload: playerId})
-export const toggleSessionReady = () =>({type: 'TOGGLE_SESSION_READY'})
+export const incrementPlayerPoints = playerId => ({type: 'INCREMENT_PLAYER_POINT', payload: playerId})
+export const selectAnswer = (playerId, answer) => ({type: 'SELECT_ANSWER', payload: playerId, answer:answer})

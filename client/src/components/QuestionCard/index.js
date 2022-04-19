@@ -1,11 +1,13 @@
 import React from "react";
 import { Button, Card, ListGroup, } from "react-bootstrap";
-
-
+import { useDispatch } from "react-redux";
+import { selectAnswer } from "../../actions";
 
 export const QuestionCard = ({ question }) => {
-    console.log("questionData", question)
-
+    const dispatch = useDispatch()
+    const handleAnswerSelection = (id, answer) => {
+        dispatch(selectAnswer(id, answer))
+    }
     return (
 
         <Card>
@@ -14,7 +16,7 @@ export const QuestionCard = ({ question }) => {
                 <ListGroup>
                     {
                         question.answers.map(answer => (
-                            <Button key={Math.random()} className="btn-secondary my-1">{answer}</Button>
+                            <Button onClick={()=>handleAnswerSelection(0, answer)} key={Math.random()} className="btn-secondary my-1">{answer}</Button>
                         ))
                     }
                 </ListGroup>

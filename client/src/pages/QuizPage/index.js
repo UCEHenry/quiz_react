@@ -9,10 +9,13 @@ import { decode } from "html-entities"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import useAxios from '../../hooks/useAxios';
+import { incrementPlayerPoints } from '../../actions';
 
 export const QuizPage = () => {
-    // const [players, setPlayers] = useState([{ 'id': 0, 'name': 'Idris', 'points': 0, 'isReady': false }, { 'id': 1, 'name': 'Paul', 'points': 0, 'isReady': false }, { 'id': 2, 'name': 'Henry', 'points': 0, 'isReady': false }, { 'id': 3, 'name': 'Marco', 'points': 0, 'isReady': false }])
+    // Player state
     const players = useSelector(state => state.players)
+
+    // Quiz settings
     const {
         question_category,
         question_difficulty,
@@ -20,49 +23,29 @@ export const QuizPage = () => {
         amount_of_questions,
         score
     } = useSelector((state) => state.settingsReducer);
+
+    
     const [questionsLeft, setQuestionsLeft] = useState([])
     const [questionToAnswer, setQuestionToAnswer] = useState('')
-
+    const [answerData, setAnswerData] = useState([])
     const [partyReady, setPartyReady] = useState(false)
-    const sessionState = useSelector(state => state.sessionState)
+    const dispatch = useDispatch()
 
+    // Fomats quiz data mixing correct and incorrect answers together while also removing other unecessary bits of info.
     const quizDataFormatter = (quizData) => {
         let formattedQuestionsList = [];
+        let answersList = [];
         for (let i = 0; i< quizData.length; i++) {
             const qData = quizData[i]
             qData['id'] = i
             formattedQuestionsList.push({'id': qData['id'],'question':qData['question'], "answers": answerRandomiser(qData)})
+            answersList.push({'id':qData['id'], 'answers': qData['correct_answer']})
         }
+        setAnswerData(answersList)
         setQuestionsLeft(formattedQuestionsList)
 
     }
-
-    // const {
-    //     question_category,
-    //     question_difficulty,
-    //     question_type,
-    //     amount_of_questions,
-    //     score
-    // } = useSelector((state) => state.settingsReducer);
-    // console.log(question_category)
-    // const history = useNavigate();
-    // const dispatch = useDispatch();
-
-    // let apiUrl = `/api.php?amount=${amount_of_questions}`;
-    // if (question_category) {
-    //     apiUrl = apiUrl.concat(`&category=${question_category}`)
-    // }
-    // if (question_difficulty) {
-    //     apiUrl = apiUrl.concat(`&difficulty=${question_difficulty}`)
-    // }
-    // if (question_type) {
-    //     apiUrl = apiUrl.concat(`&type=${question_type}`)
-    // }
-
-    // const { response, loading } = useAxios({ url: apiUrl });
-    // const [questionIndex, setQuestionIndex] = useState(0);
-    // const [options, setOptions] = useState([]);
-
+    // Calls data from third party quiz api
     const getQuestions = async (question_category, question_difficulty, question_type, amount_of_questions) => {
         let apiUrl = `/api.php?amount=${amount_of_questions}`;
         if (question_category) {
@@ -75,11 +58,10 @@ export const QuizPage = () => {
             apiUrl = apiUrl.concat(`&type=${question_type}`)
         }
         const resp = await axios.get(`https://opentdb.com${apiUrl}`)
-        quizDataFormatter(resp.data.results)
-        // const { response, loading } = useAxios({ url: apiUrl });
-        
+        quizDataFormatter(resp.data.results)        
     }
 
+    // Randomises the position of the answers in an array.
     const answerRandomiser = (question) => {
         const answers = question['incorrect_answers'].concat([question['correct_answer']]);
 
@@ -92,58 +74,35 @@ export const QuizPage = () => {
         return answers
     }
 
-    // const answerCheck = (questionId, playerAnswer, quizData) => {
-    //     const correctAnswer = quizData.find((item) => item['id'] === questionId)['correct_answer']
-    //     if (playerAnswer === correctAnswer) {
-    //         console.log("1 point")
-    //     } else {
-    //         console.log("-1 point")
-    //     }
-    // }
-    const questionRandomiser = (questionsList) => {
-        for (let i=questionsList.length -1; i> 0; i--) {
-            const randIdx = Math.floor(Math.random()* (i+1))
-            const temp = questionsList[i]
-            questionsList[i] = questionsList[randIdx]
-            questionsList[randIdx] = temp
-        }
-        console.log(questionsList)
-    }
-
+    // Checks to see how many players are ready. if all are ready then question board is shown.
     const handlePartyReady = (players) => {
         let readyCounter = 0
-        console.log(players)
+
         for (const player of players) {
             if (player.isReady) {
                 readyCounter += 1
-                console.log('ready')
             }
         }
-        console.log('ready count: ',readyCounter)
         if (readyCounter === players.length) {
             setPartyReady(true)
         }
-        // setPartyReady(true)
     }
-
+    // Gets quiz data from api on load.
     useEffect(() => {
-        // quizDataFormatter(quizDataResp)
-        handlePartyReady(players)
-        console.log('use effect happened')
         getQuestions(question_category, question_difficulty, question_type, amount_of_questions)
-        // if (questionsLeft.length) {
-        //     if (response?.results.length) {
-        //         const question = response.results[questionIndex];
-        //         let answers = [...question.incorrect_answers];
-        //         answers.splice(
-        //             getRandomInt(question.incorrect_answer.length),
-        //             0,
-        //             question.correct_answer
-        //         );
-        //         console.log(question)
-        //         setOptions(answers);
-        //     }
-        // }
+
+    }, [])
+    // checks if all players are ready // TODO currently this also deals with checking if player has chosen an answer however this also changes the question everytime a button is pressed. not good.
+    useEffect(()=>{
+        handlePartyReady(players)
+        if(partyReady) {
+            handleClickAnswer()
+            const randQuestIdx = Math.floor(Math.random() * questionsLeft.length + 1 )
+            setQuestionToAnswer(questionsLeft[randQuestIdx])
+            // console.log(questionToAnswer)
+        } else {
+            setQuestionToAnswer(questionsLeft[0])
+        }
     }, [players])
 
     // if (loading) {
@@ -152,15 +111,18 @@ export const QuizPage = () => {
     //     </Box>
     // }
 
-    const handleClickAnswer = (e) => {
-        const question = response.results[questionIndex];
-        if (e.target.textContent === question.correct_answer) {
-            dispatch(handleScoreChange(score + 1));
-        }
-        if (questionIndex + 1 < response.results.length) {
-            setQuestionIndex(questionIndex + 1);
-        } else {
-            this.prop.history.push('/score')
+    const handleClickAnswer = () => {
+        const correctAnswer = answerData.find(answer => answer.id === questionToAnswer.id);
+
+        console.log(correctAnswer.answers)
+        console.log(players[0].selectedAnswer)
+        for (const player of players) {
+            if (player.selectedAnswer === correctAnswer.answers) {
+                console.log("score!: ", player.id)
+                dispatch(incrementPlayerPoints(player.id))
+            } else {
+                console.log('oops')
+            }
         }
     };
 
@@ -179,11 +141,10 @@ export const QuizPage = () => {
                 </Col>
 
                 <Col>
-                    {partyReady ? <QuestionCard  question={decode(questionsLeft[0])}/>: <h2>ready up</h2>}
+                    {partyReady ? <QuestionCard  question={questionToAnswer}/>: <h2>ready up</h2>}
                 </Col>
 
             </Row>
-            <Button onClick={handlePartyReady}>test readyup</Button>
         </section>
     )
 }
