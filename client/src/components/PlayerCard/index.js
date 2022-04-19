@@ -3,7 +3,7 @@ import { Button, Card, Row } from 'react-bootstrap/'
 import { useSelector, useDispatch } from 'react-redux';
 import { togglePlayerReady } from "../../actions";
 
-export const PlayerCard = ({ player }) => {
+export const PlayerCard = ({ player, partyReady }) => {
 
     const dispatch = useDispatch()
     const handleToggle = (id) => 
@@ -24,7 +24,7 @@ export const PlayerCard = ({ player }) => {
 
             <Card.Title>{player.name}</Card.Title> 
             {/* TODO  Change  conditional to be when all are ready */}
-            {false? <Card.Body>{player.points}</Card.Body> : <Button className={readyButtonColour()} onClick={()=>handleToggle(player.id)}>Readyup</Button>}
+            {partyReady? <Card.Body>{player.points}</Card.Body> : <Button className={readyButtonColour()} onClick={()=>handleToggle(player.id)}>Readyup</Button>}
         </Card>
     )
 }

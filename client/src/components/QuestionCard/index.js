@@ -1,24 +1,24 @@
 import React from "react";
-import { Button, Card, ListGroup,  } from "react-bootstrap";
+import { Button, Card, ListGroup, } from "react-bootstrap";
 
 
 
-export const QuestionCard = ({question}) => {
+export const QuestionCard = ({ question }) => {
     console.log("questionData", question)
-    
+
     return (
-        
-        //<Card>
-            {/* <Card.Header>{question.question}</Card.Header>
+
+        <Card>
+            <Card.Header>{question.question}</Card.Header>
             <Card.Body>
                 <ListGroup>
                     {
-                        question.answers.map(answer=> (
+                        question.answers.map(answer => (
                             <Button key={Math.random()} className="btn-secondary my-1">{answer}</Button>
                         ))
                     }
                 </ListGroup>
             </Card.Body>
-        </Card> */}
+        </Card>
     )
 }
