@@ -37,17 +37,17 @@ export const QuizPage = () => {
         question_type,
         amount_of_questions,
         score
-      } = useSelector((state) => state);
+      } = useSelector((state) => state.settingsReducer);
       const history = useNavigate();
       const dispatch = useDispatch();
   
       let apiUrl = `/api.php?amount=${amount_of_questions}`;
       if(question_category) {
           apiUrl = apiUrl.concat(`&category=${question_category}`)
-      }
+      } 
       if(question_difficulty) {
           apiUrl = apiUrl.concat(`&difficulty=${question_difficulty}`)
-      }
+      } 
       if(question_type) {
           apiUrl = apiUrl.concat(`&type=${question_type}`)
       }
@@ -139,7 +139,18 @@ console.log(apiUrl);
             </Col>
 
             <Col>
-                {partyReady ? <QuestionCard  question={response.results[questionIndex].question}/>: <h2>ready up</h2>}
+            <Box>
+            <Typography variant="h4">Questions {questionIndex + 1}</Typography>
+            <Typography mt={5}>{decode(response.results[questionIndex].question)}</Typography>
+            {options.map((data, id) => (
+              <Box mt={2} key={id}>
+                 <Button onClick={handleClickAnswer} variant="contained">{decode(data)}</Button>
+              </Box>
+             
+            ))}
+            <Box mt={5}>Score: {score} / {response.results.length} </Box>
+        </Box>
+                
             </Col>
 
             </Row>

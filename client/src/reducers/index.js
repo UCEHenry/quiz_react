@@ -1,7 +1,7 @@
 
 import {combineReducers} from 'redux'
 import { playerReducer } from './playerReducer'
-import  settingsReducer from './settingsReducer'
+import settingsReducer from './settingsReducer'
 import { sessionReducer } from './sessionReducer'
 
 export const allReducer = combineReducers({
