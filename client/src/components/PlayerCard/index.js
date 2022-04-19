@@ -20,7 +20,9 @@ export const PlayerCard = ({ player }) => {
 
     return (
         <Card id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className="text-start">
-            <Card.Title>{player.name}</Card.Title>
+
+            <Card.Title>{player.name}</Card.Title> 
+            {/* TODO  Change  conditional to be when all are ready */}
             {false? <Card.Body>{player.points}</Card.Body> : <Button className={readyButtonColour()} onClick={()=>handleToggle(player.id)}>Readyup</Button>}
         </Card>
     )
