@@ -1,5 +1,5 @@
-INSERT INTO users (id, username, score) 
+INSERT INTO users (username, score) 
 VALUES
-(1,'Goku', 10 ),
-(2, 'Majin Buu', 4 ),
-(3, 'Freezer', 2 );
+('Goku', 10 ),
+('Majin Buu', 4 ),
+('Freezer', 2 );

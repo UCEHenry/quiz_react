@@ -24,7 +24,7 @@ services:
       - NODE_ENV=development
     depends_on:
       - db
-    command: bash -c "npm install && npm run seedDev && npm run dev"
+    command: bash -c "npm install && npm run seedDev && npm start"
 
   db:
     container_name: debug_dev_db
