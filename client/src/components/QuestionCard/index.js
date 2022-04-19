@@ -4,11 +4,12 @@ import { Button, Card, ListGroup,  } from "react-bootstrap";
 
 
 export const QuestionCard = ({question}) => {
-    console.log("questionData", question.id)
+    console.log("questionData", question)
     
     return (
-        <Card>
-            <Card.Header>{question.question}</Card.Header>
+        
+        //<Card>
+            {/* <Card.Header>{question.question}</Card.Header>
             <Card.Body>
                 <ListGroup>
                     {
@@ -18,6 +19,6 @@ export const QuestionCard = ({question}) => {
                     }
                 </ListGroup>
             </Card.Body>
-        </Card>
+        </Card> */}
     )
 }
