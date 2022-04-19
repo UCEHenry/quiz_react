@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { PlayerCard, QuestionCard } from '../../components'
 import { CardGroup, Row, Col, Container, Button } from 'react-bootstrap'
 import quizDataResp from '../../assets/testData/questions.json'
+import { useSelector, useDispatch } from 'react-redux';
+
 import axios from 'axios'
 
 export const QuizPage = () => {
-    const [players, setPlayers] = useState([{ 'id': 0, 'name': 'Idris', 'points': 0, 'isReady': false }, { 'id': 1, 'name': 'Paul', 'points': 0, 'isReady': false }, { 'id': 2, 'name': 'Henry', 'points': 0, 'isReady': false }, { 'id': 3, 'name': 'Marco', 'points': 0, 'isReady': false }])
+    // const [players, setPlayers] = useState([{ 'id': 0, 'name': 'Idris', 'points': 0, 'isReady': false }, { 'id': 1, 'name': 'Paul', 'points': 0, 'isReady': false }, { 'id': 2, 'name': 'Henry', 'points': 0, 'isReady': false }, { 'id': 3, 'name': 'Marco', 'points': 0, 'isReady': false }])
+    const players = useSelector(state=> state.players)
+
     const [questionsLeft, setQuestionsLeft] = useState([])
     const [questionToAnswer, setQuestionToAnswer] = useState('')
     const [paryReady, setPartyReady] = useState(false)
@@ -20,7 +24,6 @@ export const QuizPage = () => {
         }
         setQuestionsLeft(formattedQuestionsList)
     }
-
 
     const answerRandomiser = (question) => {
         const answers = question['incorrect_answers'].concat([question['correct_answer']]);
@@ -55,7 +58,6 @@ export const QuizPage = () => {
         // }
         setPartyReady(true)
     }
-
 
     useEffect(() => {
         quizDataFormatter(quizDataResp)
