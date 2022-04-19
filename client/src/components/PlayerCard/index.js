@@ -11,6 +11,7 @@ export const PlayerCard = ({ player, partyReady }) => {
         
         dispatch(togglePlayerReady(id))
     }
+
     const readyButtonColour = () => {
         if (player.isReady) {
             return 'btn-success'
@@ -20,10 +21,10 @@ export const PlayerCard = ({ player, partyReady }) => {
     }
 
     return (
-        <Card id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className="text-start">
+        <Card role={`PlayerCard_${player.name}`} id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className="text-start">
 
             <Card.Title>{player.name}</Card.Title> 
-            {partyReady? <Card.Body>{player.points}</Card.Body> : <Button className={readyButtonColour()} onClick={()=>handleToggle(player.id)}>Readyup</Button>}
+            {partyReady? <Card.Body role={`playerScore_${player.name}`}>{player.points}</Card.Body> : <Button role={`playerReadyButton_${player.name}`} className={readyButtonColour()} onClick={()=>handleToggle(player.id)}>Readyup</Button>}
         </Card>
     )
 }

@@ -7,10 +7,14 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
+// import playerReducer from '../reducers/playerReducer'
+import {allReducer} from '../reducers'
+
+
 const TestProviders = ({ initState }) => {
-    initState ||= { location: "", result: { sunrise: "", sunset: "" }, loading: false };
-    let testReducer = () => searchReducer(initState, { type: '@@INIT' })
-    const testStore = createStore(testReducer, applyMiddleware(thunk))
+    // initState ||= [{ 'id': 0, 'name': 'Idris', 'points': 0, 'isReady': false, 'selectedAnswer':'' }];
+    // let testReducer = () => playerReducer(initState, { type: '@@INIT' })
+    const testStore = createStore(allReducer, applyMiddleware(thunk))
 
     return ({ children }) => (
         <Provider store={testStore}>
@@ -28,6 +32,7 @@ import axios from 'axios';
 jest.mock('axios')
 axios.get.mockResolvedValue({ data: [ { latlng: [123, 456] }]})
 
+global.renderWithReduxProvider = renderWithReduxProvider
 global.React = React;
 global.render = render;
 
