@@ -12,8 +12,9 @@ export const QuizPage = () => {
 
     const [questionsLeft, setQuestionsLeft] = useState([])
     const [questionToAnswer, setQuestionToAnswer] = useState('')
-    const [paryReady, setPartyReady] = useState(false)
-    
+
+    const [partyReady, setPartyReady] = useState(false)
+    const sessionState = useSelector(state => state.sessionState)
     
     const quizDataFormatter = (quizData) => {
         let formattedQuestionsList = [];
@@ -47,20 +48,22 @@ export const QuizPage = () => {
     // }
 
     const handlePartyReady = () => {
-        // const readyCounter = 0
-        // for (const player of players) {
-        //     if (player.isReady) {
-        //         readyCounter ++
-        //     }
-        // }
-        // if (readyCounter === players.length) {
-        //     setPartyReady(true)
-        // }
-        setPartyReady(true)
+        const readyCounter = 0
+        for (const player of players) {
+            if (player.isReady) {
+                readyCounter ++
+            }
+        }
+        console.log(readyCounter)
+        if (readyCounter === players.length) {
+            setPartyReady(true)
+        }
+        // setPartyReady(true)
     }
 
     useEffect(() => {
         quizDataFormatter(quizDataResp)
+        handlePartyReady()
     }, [])
 
     return (
@@ -78,7 +81,7 @@ export const QuizPage = () => {
             </Col>
 
             <Col>
-                {paryReady ? <QuestionCard  question={questionsLeft[0]}/>: <h2>ready up</h2>}
+                {partyReady ? <QuestionCard  question={questionsLeft[0]}/>: <h2>ready up</h2>}
             </Col>
 
             </Row>

@@ -8,6 +8,7 @@ export const PlayerCard = ({ player }) => {
     const dispatch = useDispatch()
     const handleToggle = (id) => 
     {
+        
         dispatch(togglePlayerReady(id))
     }
     const readyButtonColour = () => {

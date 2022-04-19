@@ -32,3 +32,4 @@ export const handleScoreChange = payload => ({
 });
 
 export const togglePlayerReady = playerId => ({type: 'TOGGLE_READY', payload: playerId})
+export const toggleSessionReady = () =>({type: 'TOGGLE_SESSION_READY'})

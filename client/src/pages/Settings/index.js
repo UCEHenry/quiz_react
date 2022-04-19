@@ -40,7 +40,7 @@ export const Settings = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        history.push('/questions')
+        history.push('/question')
     };
 
     return (

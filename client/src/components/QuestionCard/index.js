@@ -15,10 +15,7 @@ export const QuestionCard = ({question}) => {
                         question.answers.map(answer=> (
                             <Button key={Math.random()} className="btn-secondary my-1">{answer}</Button>
                         ))
-                        
                     }
-                
-
                 </ListGroup>
             </Card.Body>
         </Card>
