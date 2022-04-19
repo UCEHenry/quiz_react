@@ -1,4 +1,4 @@
-import { CHANGE_AMOUNT, CHANGE_DIFFICULTY, CHANGE_SCORE, CHANGE_TYPE } from './actionTypes';
+import { CHANGE_AMOUNT, CHANGE_DIFFICULTY, CHANGE_SCORE, CHANGE_TYPE } from '../actions/actionTypes';
 
 
 
@@ -10,7 +10,7 @@ const initialState = {
   score: 0,
 };
 
-const reducer = (state = initialState, action) => {
+const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_DIFFICULTY:
       return {
@@ -38,4 +38,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default settingsReducer;
