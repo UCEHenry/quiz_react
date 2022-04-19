@@ -5,8 +5,9 @@ services:
     working_dir: /code
     volumes:
       - type: bind
-        source: ./server
+        source: ./api
         target: /code
+
   db:
     image: postgres:12.4
     environment: 
