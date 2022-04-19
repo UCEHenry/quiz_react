@@ -10,7 +10,6 @@ class User {
     static get all(){ 
         return new Promise (async (resolve, reject) => {
             try {
-                console.log(db);
                 const result = await db.query(`SELECT * FROM users;`)
                 const users = result.rows.map(user => ({ id: user.id, username: user.username, score: user.score }))
                 resolve(users);
@@ -26,7 +25,7 @@ class User {
                 let addUser = await db.query(`INSERT INTO users (username)
                                     VALUES ($1)
                                     RETURNING *;`, [ username ]);
-                let newUser = addUser.rows[0];
+                let newUser = new User(addUser.rows[0]);
                 resolve (newUser);
             } catch (err) {
                 reject('User not found');
