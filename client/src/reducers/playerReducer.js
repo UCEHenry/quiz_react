@@ -5,16 +5,13 @@ export const playerReducer = (state=initState, action) => {
     switch(action.type) {
         case 'TOGGLE_READY':
             const playerToToggle = state.find(p => p.id ===action.payload)
-            console.log(playerToToggle)
             const playerListIndex = state.indexOf(playerToToggle)
-            console.log(playerListIndex)
             const updatePlayerReady = [
                 ...state.slice(0, playerListIndex),
                 {...playerToToggle, isReady: !playerToToggle.isReady},
                 ...state.slice(playerListIndex+1)
             ]
-            console.log(updatePlayerReady)
-            return updatePlayerReady
+            return state = updatePlayerReady
         default:
             return state
     }
