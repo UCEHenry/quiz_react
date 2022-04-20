@@ -13,6 +13,7 @@ export const Settings = () => {
   if (loading) {
     return (
       <Box mt={20}>
+        <h1>Host Settings</h1>
         <CircularProgress />
       </Box>
     );

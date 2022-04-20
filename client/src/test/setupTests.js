@@ -30,7 +30,7 @@ const renderWithReduxProvider = (ui, options={}) => {
 
 import axios from 'axios';
 jest.mock('axios')
-axios.get.mockResolvedValue({ data: settingsCategoryDataMock, status: 200, statusText: 'OK',headers: {},config: {},})
+// axios.get.mockResolvedValue(() => Promise.resolve({ data: settingsCategoryDataMock, status: 200, statusText: 'OK',headers: {},config: {},}))
 
 global.renderWithReduxProvider = renderWithReduxProvider
 global.React = React;
