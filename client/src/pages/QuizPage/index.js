@@ -100,11 +100,12 @@ export const QuizPage = () => {
     // checks if all players are ready // TODO currently this also deals with checking if player has chosen an answer however this also changes the question everytime a button is pressed. not good.
     useEffect(() => {
         handlePartyReady(players)
+        console.log('change to players state')
         if (partyReady) {
             handleClickAnswer()
             const randQuestIdx = Math.floor(Math.random() * questionsLeft.length + 1)
             setQuestionToAnswer(questionsLeft[randQuestIdx])
-            // console.log(questionToAnswer)
+            
         } else {
             setQuestionToAnswer(questionsLeft[0])
         }
@@ -146,7 +147,7 @@ export const QuizPage = () => {
                 </Col>
 
                 <Col role={'questionArea'}>
-                    {partyReady ? <QuestionCard role={'questionCard'}  question={questionToAnswer} /> : <h2>ready up</h2>}
+                    {partyReady && questionToAnswer ? <QuestionCard role={'questionCard'}  question={questionToAnswer} /> : <h2>ready up</h2>}
                 </Col>
 
             </Row>

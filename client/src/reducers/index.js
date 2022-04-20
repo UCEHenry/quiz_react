@@ -7,5 +7,4 @@ import  settingsReducer from './settingsReducer'
 export const allReducer = combineReducers({
     players:playerReducer,
     settingsReducer
-
 })

@@ -1,7 +1,7 @@
 const initState = [{ 'id': 0, 'name': 'Idris', 'points': 0, 'isReady': false, 'selectedAnswer':'' }, { 'id': 1, 'name': 'Paul', 'points': 0, 'isReady': false, 'selectedAnswer':''  }, { 'id': 2, 'name': 'Henry', 'points': 0, 'isReady': false, 'selectedAnswer':''  }, { 'id': 3, 'name': 'Marco', 'points': 0, 'isReady': false, 'selectedAnswer':''}]
 
 
-export const playerReducer = (state=initState, action) => {
+export const playerReducer = (state=[], action) => {
 
     const playerTo = (state, action) => {
         const playerTofind = state.find(p => p.id === action.payload)

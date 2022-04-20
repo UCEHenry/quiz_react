@@ -1,11 +1,11 @@
 /** @jest-environment jsdom */
 import {screen} from '@testing-library/react';
-import axios from 'axios';
+import axiosMock from 'axios';
 import { act } from 'react-dom/test-utils';
 import { waitFor } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Settings } from '.';
-// import { settingsCategoryDataMock } from '../../../__mocks__/axiosMock';
+import triviaData from '../../../__mocks__/mockSettingsData'
 describe('Settings Page', () => {
     // let getResultMock;
     // beforeEach( ()=>{
@@ -26,14 +26,13 @@ describe('Settings Page', () => {
         // const settingsPage = screen.getByText(/Host/i);
         // expect(settingsPage).toBeInTheDocument();
     })
-    test('Checks "Catergory" has 29 options', () => {
-        // axios.get.mockImplementationOnce(()=>Promise.resolve({data:settingsCategoryDataMock}))
-        // act(() => {
-        //     getResultMock = jest.fn()
-        //     renderWithReduxProvider(<Router><Settings/></Router>)
-        // })
-        // const categoryDropDown = screen.findByLabelText('Category')
-        // let counter = 0
+    test('Checks "Catergory" has 29 options', async () => {
+        axiosMock.get.mockResolvedValueOnce({data:triviaData})
+
+        renderWithReduxProvider(<Settings/>)
+
+        const categoryDropDown = await waitFor(()=>screen.findByLabelText('Category'))
+        console.log(categoryDropDown)
         // expect(counter).toEqual(counter)
 
     })
