@@ -57,9 +57,9 @@ describe('users controller', () => {
                 username: 'Marco', score : 12
             }
             jest.spyOn(User, 'updateUserScore')
-                .mockResolvedValue(testUser);
+                .mockResolvedValue(new User(testUser));
             
-            const mockReq = { params: { username: "Marco", score: 10 } }
+            const mockReq = { body: { username: "Marco", score: 10 } }
             await usersController.updateScore(mockReq, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(200);
             expect(mockJson).toHaveBeenCalledWith({
