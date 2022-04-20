@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
   const history = useNavigate();
-
+  console.log(response)
   if (loading) {
     return (
       <Box mt={20}>
@@ -44,6 +44,7 @@ export const Settings = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1>Host Settings</h1>
       <SelectField options={response.trivia_categories} label="Category" />
       <SelectField options={difficultyOptions} label="Difficulty" />
       <SelectField options={typeOptions} label="Type" />

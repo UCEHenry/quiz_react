@@ -1,5 +1,5 @@
 /** @jest-environment jsdom */
-import {screen, queryAllByAttribute} from '@testing-library/react';
+import {screen} from '@testing-library/react';
 import { PlayerCard } from '.';
 
 describe('Player Card', () => {
