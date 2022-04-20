@@ -55,7 +55,7 @@ class User {
                                     SET score = $1
                                     WHERE username = $2
                                     RETURNING *;`, [ score, username ]);
-                let newScore = updateScore.rows[0];
+                let newScore = new User(updateScore.rows[0]);
                 resolve (newScore);
             } catch (err) {
                 reject('User not found');
