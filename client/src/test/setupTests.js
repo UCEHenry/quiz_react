@@ -1,7 +1,9 @@
 /** @jest-environment jsdom */
 import React from 'react';
-import { settingsCategoryDataMock } from '../../__mocks__/axiosMock';
+
+import { settingsCategoryDataMock, quizData } from '../../__mocks__/axiosMockData';
 import '@testing-library/jest-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -12,14 +14,15 @@ import {allReducer} from '../reducers'
 
 
 const TestProviders = ({ initState }) => {
-    // initState ||= [{ 'id': 0, 'name': 'Idris', 'points': 0, 'isReady': false, 'selectedAnswer':'' }];
-    // let testReducer = () => playerReducer(initState, { type: '@@INIT' })
     const testStore = createStore(allReducer, applyMiddleware(thunk))
 
     return ({ children }) => (
+        <Router>
         <Provider store={testStore}>
             { children }
         </Provider>
+        </Router>
+
     )
 }
 
@@ -30,7 +33,7 @@ const renderWithReduxProvider = (ui, options={}) => {
 
 import axios from 'axios';
 jest.mock('axios')
-// axios.get.mockResolvedValue(() => Promise.resolve({ data: settingsCategoryDataMock, status: 200, statusText: 'OK',headers: {},config: {},}))
+axios.get.mockResolvedValue({data:{}})
 
 global.renderWithReduxProvider = renderWithReduxProvider
 global.React = React;

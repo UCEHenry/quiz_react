@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
   const history = useNavigate();
-  console.log(response)
+  // console.log(response)
   if (loading) {
     return (
       <Box mt={20}>

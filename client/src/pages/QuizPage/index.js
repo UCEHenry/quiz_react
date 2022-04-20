@@ -24,7 +24,7 @@ export const QuizPage = () => {
         score
     } = useSelector((state) => state.settingsReducer);
 
-    
+
     const [questionsLeft, setQuestionsLeft] = useState([])
     const [questionToAnswer, setQuestionToAnswer] = useState('')
     const [answerData, setAnswerData] = useState([])
@@ -35,11 +35,11 @@ export const QuizPage = () => {
     const quizDataFormatter = (quizData) => {
         let formattedQuestionsList = [];
         let answersList = [];
-        for (let i = 0; i< quizData.length; i++) {
+        for (let i = 0; i < quizData.length; i++) {
             const qData = quizData[i]
             qData['id'] = i
-            formattedQuestionsList.push({'id': qData['id'],'question':qData['question'], "answers": answerRandomiser(qData)})
-            answersList.push({'id':qData['id'], 'answers': qData['correct_answer']})
+            formattedQuestionsList.push({ 'id': qData['id'], 'question': qData['question'], "answers": answerRandomiser(qData) })
+            answersList.push({ 'id': qData['id'], 'answers': qData['correct_answer'] })
         }
         setAnswerData(answersList)
         setQuestionsLeft(formattedQuestionsList)
@@ -47,18 +47,23 @@ export const QuizPage = () => {
     }
     // Calls data from third party quiz api
     const getQuestions = async (question_category, question_difficulty, question_type, amount_of_questions) => {
-        let apiUrl = `/api.php?amount=${amount_of_questions}`;
-        if (question_category) {
-            apiUrl = apiUrl.concat(`&category=${question_category}`)
+        try {
+            let apiUrl = `/api.php?amount=${amount_of_questions}`;
+            if (question_category) {
+                apiUrl = apiUrl.concat(`&category=${question_category}`)
+            }
+            if (question_difficulty) {
+                apiUrl = apiUrl.concat(`&difficulty=${question_difficulty}`)
+            }
+            if (question_type) {
+                apiUrl = apiUrl.concat(`&type=${question_type}`)
+            }
+            const resp = await axios.get(`https://opentdb.com${apiUrl}`)
+            console.log(resp)
+            quizDataFormatter(resp.data.results)
+        } catch (err) {
+            console.log(err)
         }
-        if (question_difficulty) {
-            apiUrl = apiUrl.concat(`&difficulty=${question_difficulty}`)
-        }
-        if (question_type) {
-            apiUrl = apiUrl.concat(`&type=${question_type}`)
-        }
-        const resp = await axios.get(`https://opentdb.com${apiUrl}`)
-        quizDataFormatter(resp.data.results)        
     }
 
     // Randomises the position of the answers in an array.
@@ -93,11 +98,11 @@ export const QuizPage = () => {
 
     }, [])
     // checks if all players are ready // TODO currently this also deals with checking if player has chosen an answer however this also changes the question everytime a button is pressed. not good.
-    useEffect(()=>{
+    useEffect(() => {
         handlePartyReady(players)
-        if(partyReady) {
+        if (partyReady) {
             handleClickAnswer()
-            const randQuestIdx = Math.floor(Math.random() * questionsLeft.length + 1 )
+            const randQuestIdx = Math.floor(Math.random() * questionsLeft.length + 1)
             setQuestionToAnswer(questionsLeft[randQuestIdx])
             // console.log(questionToAnswer)
         } else {
@@ -133,15 +138,15 @@ export const QuizPage = () => {
                 <Col>
                     <Row xs={1} md={1}>
                         {players.map(playerData => (
-                            <Col key={playerData.id}>
+                            <Col role={`PlayerElement_${playerData.name}`} key={playerData.id}>
                                 <PlayerCard player={playerData} partyReady={partyReady} />
                             </Col>
                         ))}
                     </Row>
                 </Col>
 
-                <Col>
-                    {partyReady ? <QuestionCard  question={questionToAnswer}/>: <h2>ready up</h2>}
+                <Col role={'questionArea'}>
+                    {partyReady ? <QuestionCard role={'questionCard'}  question={questionToAnswer} /> : <h2>ready up</h2>}
                 </Col>
 
             </Row>

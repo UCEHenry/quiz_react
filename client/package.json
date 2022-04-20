@@ -27,7 +27,7 @@
   "scripts": {
     "dev": "webpack-cli serve --mode development --config config/webpack.config.dev.js",
     "build": "webpack --config config/webpack.config.production.js",
-    "test": "jest --watch --setupFilesAfterEnv ./src/test/setupTests.js",
+    "test": "jest --watch --silent --setupFilesAfterEnv ./src/test/setupTests.js",
     "coverage": "jest --silent --setupFilesAfterEnv ./src/test/setupTests.js --coverage --watchAll=false",
     "autograde": "jest --silent --setupFilesAfterEnv ./src/test/setupTests.js"
   },
