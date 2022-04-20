@@ -38,17 +38,15 @@ describe('User', () => {
         })
     });
 
-    // describe('update', () => {
-    //     test('it resolves user with updated score', async () => {
-    //         let userData = { id: 1, username: 'Marco', score: 10 }
-    //         jest.spyOn(db, 'query')
-    //             .mockResolvedValueOnce({rows: [ userData] });
-    //         const result = await User.updateUserScore( 12, 'Marco');
-    //         expect(result).toBeInstanceOf(User);
-    //         expect(result).toHaveBeenCalledWith({
-    //             username: 'Marco',
-    //             score: 12
-    //         });
-    //     })
-    // });
+    describe('update', () => {
+        test('it resolves user with updated score', async () => {
+            let userData = { id:1,username: 'Goku', score: 10 }
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({rows: [ userData]});
+            await User.findByUser('Goku');
+            const updatedScore = await User.updateUserScore("Goku",21);
+            expect(updatedScore).toBeInstanceOf(User);
+            expect(updatedScore).toHaveProperty("score", 21);
+        })
+    });
 })

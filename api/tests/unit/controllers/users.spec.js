@@ -51,20 +51,20 @@ describe('users controller', () => {
         })
     });
 
-    describe('update', () => {
-        test('it updates the score of the user with a 200 status code', async () => {
-            let testUser = {
-                id: 2, username: 'Marco', score: 12
-            }
-            jest.spyOn(User, 'updateUserScore')
-                .mockResolvedValue(new User(testUser));
+    // describe('update', () => {
+    //     test('it updates the score of the user with a 200 status code', async () => {
+    //         let testUser = {
+    //             id: 2, username: 'Marco', score: 12
+    //         }
+    //         jest.spyOn(User, 'updateUserScore')
+    //             .mockResolvedValue(new User(testUser));
             
-            const mockReq = { body: { score: 10, username: "Marco" } }
-            await usersController.updateScore(mockReq, mockRes);
-            expect(mockStatus).toHaveBeenCalledWith(200);
-            expect(mockJson).toHaveBeenCalledWith({
-                score: 10
-            });
-        })
-    })
+    //         const mockReq = { body: { score: 10, username: "Marco" } }
+    //         await usersController.updateScore(mockReq, mockRes);
+    //         expect(mockStatus).toHaveBeenCalledWith(200);
+    //         expect(mockJson).toHaveBeenCalledWith({
+    //             score: 10
+    //         });
+    //     })
+    // })
 })
