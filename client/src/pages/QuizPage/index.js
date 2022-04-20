@@ -9,7 +9,7 @@ import { decode } from "html-entities"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import useAxios from '../../hooks/useAxios';
-import { incrementPlayerPoints } from '../../actions';
+import { handleScoreChange, incrementPlayerPoints } from '../../actions';
 
 export const QuizPage = () => {
     // Player state
@@ -29,7 +29,15 @@ export const QuizPage = () => {
     const [questionToAnswer, setQuestionToAnswer] = useState('')
     const [answerData, setAnswerData] = useState([])
     const [partyReady, setPartyReady] = useState(false)
+    
+    const playerScores = {
+
+    }
     const dispatch = useDispatch()
+    //const getScore()
+    //const updateScore() = state + 1 (parameter: playerScores.player)
+    //initial 0
+    //function as prop
 
     // Fomats quiz data mixing correct and incorrect answers together while also removing other unecessary bits of info.
     const quizDataFormatter = (quizData) => {
@@ -119,7 +127,7 @@ export const QuizPage = () => {
         for (const player of players) {
             if (player.selectedAnswer === correctAnswer.answers) {
                 console.log("score!: ", player.id)
-                dispatch(incrementPlayerPoints(player.id))
+                dispatch(handleScoreChange(score + 1))
             } else {
                 console.log('oops')
             }
@@ -143,6 +151,8 @@ export const QuizPage = () => {
                 <Col>
                     {partyReady ? <QuestionCard  question={questionToAnswer}/>: <h2>ready up</h2>}
                 </Col>
+
+            
 
             </Row>
         </section>
