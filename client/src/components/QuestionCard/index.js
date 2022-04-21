@@ -5,7 +5,7 @@ import { selectAnswer } from "../../actions";
 import { decode } from "html-entities"
 
 
-export const QuestionCard = ({ question }) => {
+export const QuestionCard = ({ question, currentPlayerId }) => {
     const dispatch = useDispatch()
     const handleAnswerSelection = (id, answer) => {
         dispatch(selectAnswer(id, answer))
@@ -19,7 +19,7 @@ export const QuestionCard = ({ question }) => {
                 <ListGroup>
                     {
                         question.answers.map(answer => (
-                            <Button onClick={()=>handleAnswerSelection(0, answer)} key={Math.random()} className="btn-secondary my-1">{answer}</Button>
+                            <Button onClick={()=>handleAnswerSelection(currentPlayerId, answer)} key={Math.random()} className="btn-secondary my-1">{answer}</Button>
                         ))
                     }
                 </ListGroup>

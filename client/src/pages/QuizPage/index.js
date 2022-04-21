@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 import { gameOver, incrementPlayerPoints } from '../../actions';
+import { stepConnectorClasses } from '@mui/material';
 
 export const QuizPage = () => {
     // Player state
@@ -20,7 +21,6 @@ export const QuizPage = () => {
         question_difficulty,
         question_type,
         amount_of_questions,
-        score
     } = useSelector((state) => state.settingsReducer);
 
     const [questionsLeft, setQuestionsLeft] = useState([])
@@ -28,6 +28,7 @@ export const QuizPage = () => {
     const [answerData, setAnswerData] = useState([])
     const [partyReady, setPartyReady] = useState(false)
     const [displayTimer, setDisplayTimer] = useState(5)
+    const [currentPlayer, setCurrentPlayer] = useState(0)
 
     const dispatch = useDispatch()
     const redirect = useNavigate()
@@ -103,34 +104,34 @@ export const QuizPage = () => {
 
     const handleClickAnswer = () => {
         const correctAnswer = answerData.find(answer => answer.id === questionToAnswer.id);
-        for (const player of players) {
+        const player = players[currentPlayer]
             if (player.selectedAnswer === correctAnswer.answers) {
                 console.log("score!: ", player.id)
                 dispatch(incrementPlayerPoints(player.id))
             } else {
                 console.log('oops')
             }
-        }
+        // for (const player of players) {
+        //     if (player.selectedAnswer === correctAnswer.answers) {
+        //         console.log("score!: ", player.id)
+        //         dispatch(incrementPlayerPoints(player.id))
+        //     } else {
+        //         console.log('oops')
+        //     }
+        // }
     };
     const nextQuestion = () => {
-        console.log('question to answer id:', questionToAnswer.id)
-        console.log('question lefts:', questionsLeft.length -1)
+        console.log(`question:${questionToAnswer.id + 1}/${questionsLeft.length}`)
+        console.log(`current player: ${currentPlayer + 1}/${players.length}`)
         if(questionToAnswer.id == questionsLeft.length -1){
-
             dispatch(gameOver())
         } else {
+            if (currentPlayer < players.length -1) {
+                setCurrentPlayer(currentPlayer + 1)
+            } else {
+                setCurrentPlayer(0)
+            }
             setQuestionToAnswer(questionsLeft[questionToAnswer.id + 1])
-        }
-    }
-
-    const countdown = () => {
-        if (partyReady) {
-            const timer = setTimeout(()=> {
-                handleClickAnswer()
-                setDisplayTimer(displayTimer - 1)
-                console.log(displayTimer)
-            }, 3000)
-            return () => clearTimeout(timer)
         }
     }
 
@@ -141,7 +142,7 @@ export const QuizPage = () => {
     }, [])
 
 
-    // checks if all players are ready // TODO currently this also deals with checking if player has chosen an answer however this also changes the question everytime a button is pressed. not good.
+    // checks if all players are ready 
     useEffect(() => {
         handlePartyReady(players)
         
@@ -149,18 +150,17 @@ export const QuizPage = () => {
         
     }, [players])
 
+    // Controls the timer for players turns, as well as moving onto the next question
     useEffect(()=>{
         if (!partyReady) {
             setQuestionToAnswer(questionsLeft[0])
         } else if (partyReady && displayTimer != 0) {
             const timer = setTimeout(()=> {
-                // handleClickAnswer()
                 setDisplayTimer(displayTimer - 1)
                 console.log(displayTimer)
             }, 1000)
             return () => clearTimeout(timer)
         } else if (displayTimer === 0) {
-            // handleClickAnswer()
             const dealWithResultsTimer = setTimeout(()=>{
                 handleClickAnswer()
                 nextQuestion()
@@ -196,7 +196,7 @@ export const QuizPage = () => {
                 </Col>
 
                 <Col role={'questionArea'}>
-                    {partyReady && questionToAnswer ? <QuestionCard role={'questionCard'} question={questionToAnswer} /> : <h2>ready up</h2>}
+                    {partyReady && questionToAnswer ? <QuestionCard role={'questionCard'} question={questionToAnswer} currentPlayerId={currentPlayer} /> : <h2>ready up</h2>}
                 </Col>
 
             
