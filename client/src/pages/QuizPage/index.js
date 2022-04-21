@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { PlayerCard, QuestionCard } from '../../components'
-import { CardGroup, Row, Col, Container } from 'react-bootstrap'
-import quizDataResp from '../../assets/testData/questions.json'
+import { Row, Col} from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, CircularProgress, Typography } from "@mui/material"
-import { Box } from "@mui/system"
+
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-import useAxios from '../../hooks/useAxios';
-import { gameOver, handleScoreChange, incrementPlayerPoints } from '../../actions';
+
+import { gameOver, incrementPlayerPoints } from '../../actions';
 
 export const QuizPage = () => {
     // Player state
@@ -33,10 +31,6 @@ export const QuizPage = () => {
 
     const dispatch = useDispatch()
     const redirect = useNavigate()
-    //const getScore()
-    //const updateScore() = state + 1 (parameter: playerScores.player)
-    //initial 0
-    //function as prop
 
     // if (questionsLeft.length == 0) {
     //     return (
@@ -113,16 +107,12 @@ export const QuizPage = () => {
             if (player.selectedAnswer === correctAnswer.answers) {
                 console.log("score!: ", player.id)
                 dispatch(incrementPlayerPoints(player.id))
-                // dispatch(playerAnswered)
             } else {
                 console.log('oops')
             }
         }
     };
     const nextQuestion = () => {
-
-        
-        // console.log("random index",randQuestIdx)
         console.log('question to answer id:', questionToAnswer.id)
         console.log('question lefts:', questionsLeft.length -1)
         if(questionToAnswer.id == questionsLeft.length -1){
@@ -131,15 +121,6 @@ export const QuizPage = () => {
         } else {
             setQuestionToAnswer(questionsLeft[questionToAnswer.id + 1])
         }
-        // const newQuestionsList = questionsLeft.filter((q) => q !== questionsLeft[randQuestIdx])
-        // setQuestionsLeft(newQuestionsList)
-        // setQuestionsLeft(questionsLeft.splice(randQuestIdx,1))
-        // if (gameState === players.length) {
-        //     setQuestionToAnswer(questionsLeft[randQuestIdx])
-        //     setQuestionsLeft(questionsLeft.splice(randQuestIdx,1))
-        // } else {
-        //     // dispatch(playerAnswered)
-        // }
     }
 
     const countdown = () => {
