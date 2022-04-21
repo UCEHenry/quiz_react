@@ -27,15 +27,17 @@ export const QuizPage = () => {
     const [questionToAnswer, setQuestionToAnswer] = useState('')
     const [answerData, setAnswerData] = useState([])
     const [partyReady, setPartyReady] = useState(false)
-    const [displayTimer, setDisplayTimer] = useState(120)
+    const [displayTimer, setDisplayTimer] = useState(10)
 
     const dispatch = useDispatch()
 
-    if (!questionsLeft) {
-        <Box mt={20}>
-            <CircularProgress />
-        </Box>
-    }
+    // if (questionsLeft.length == 0) {
+    //     return (
+    //     <Box mt={20}>
+    //         <CircularProgress />
+    //     </Box>
+    //     )
+    // }
 
     // Randomises the position of the answers in an array.
     const answerRandomiser = (question) => {
@@ -113,13 +115,14 @@ export const QuizPage = () => {
     const nextQuestion = () => {
 
         const randQuestIdx = Math.floor(Math.random() * questionsLeft.length + 1)
-
-        if (gameState === players.length) {
-            setQuestionToAnswer(questionsLeft[randQuestIdx])
-            setQuestionsLeft(questionsLeft.splice(randQuestIdx,1))
-        } else {
-            dispatch(playerAnswered)
-        }
+        setQuestionToAnswer(questionsLeft[randQuestIdx])
+        setQuestionsLeft(questionsLeft.splice(randQuestIdx,1))
+        // if (gameState === players.length) {
+        //     setQuestionToAnswer(questionsLeft[randQuestIdx])
+        //     setQuestionsLeft(questionsLeft.splice(randQuestIdx,1))
+        // } else {
+        //     // dispatch(playerAnswered)
+        // }
     }
 
     const countdown = () => {
@@ -135,8 +138,7 @@ export const QuizPage = () => {
 
     // Gets quiz data from api on load.
     useEffect(() => {
-        getQuestions(question_category, question_difficulty, question_type, amount_of_questions)
-        setQuestionToAnswer(questionsLeft[0])
+        getQuestions(question_category, question_difficulty, question_type, amount_of_questions)       
         console.log('load')
     }, [])
 
@@ -150,7 +152,9 @@ export const QuizPage = () => {
     }, [players])
 
     useEffect(()=>{
-        if (partyReady && displayTimer != 0) {
+        if (!partyReady) {
+            setQuestionToAnswer(questionsLeft[0])
+        } else if (partyReady && displayTimer != 0) {
             const timer = setTimeout(()=> {
                 // handleClickAnswer()
                 setDisplayTimer(displayTimer - 1)
@@ -158,20 +162,24 @@ export const QuizPage = () => {
             }, 1000)
             return () => clearTimeout(timer)
         } else if (displayTimer === 0) {
-            
-            nextQuestion()
             handleClickAnswer()
+            const dealWithResultsTimer = setTimeout(()=>{
+                nextQuestion()
+                setDisplayTimer(10)
+            }, 5000)
+            return ()=> clearTimeout(dealWithResultsTimer)
+
         }
         console.log('change state')
     })
     
-    useEffect(()=>{
-        if (partyReady) {
-            // handleClickAnswer()
-            // nextQuestion()
-        }
-        console.log('change to game state')
-    },[gameState])
+    // useEffect(()=>{
+    //     if (partyReady) {
+    //         // handleClickAnswer()
+    //         // nextQuestion()
+    //     }
+    //     console.log('change to game state')
+    // },[gameState])
 
     return (
         <section id='Quiz Page' className='container' >
