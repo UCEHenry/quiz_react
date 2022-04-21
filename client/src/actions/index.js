@@ -5,7 +5,7 @@ import {
     CHANGE_AMOUNT,
     CHANGE_SCORE,
     CHANGE_USERNAME,
-    CHANGE_LOCAL_ONLINE,
+    LOCAL_OR_ONLINE,
     CHANGE_PLAYERS
 } from './actionTypes'
 
@@ -40,4 +40,4 @@ export const selectAnswer = (playerId, answer) => ({type: 'SELECT_ANSWER', paylo
 export const gameOver = () => ({type:'GAME_OVER'})
 export const amountOfPlayers = (amount) => ({type:'AMOUNT_OF_PLAYERS', payload: amount})
 export const usernameInput = (username) => ({type:'PLAYER_USERNAME', payload: username})
-export const localOrOnline = (localOrOnline) => ({type:'LOCAL_OR_ONLINE', payload: localOrOnline})
+export const localOrOnline = (localOrOnline) => ({type:LOCAL_OR_ONLINE, payload: localOrOnline})

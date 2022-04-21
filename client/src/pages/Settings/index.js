@@ -40,7 +40,7 @@ export const Settings = () => {
   ];
 
   const username = [
-    { id: "username", name: "Username" },
+    { id: "username", type: "input" },
   ];
 
   const difficultyOptions = [
