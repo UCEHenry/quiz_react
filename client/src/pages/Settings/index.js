@@ -15,7 +15,7 @@ export const Settings = () => {
   if (loading) {
     return (
       <Box mt={20}>
-        <h1>Host Settings</h1>
+        <h1>Game Settings</h1>
         <CircularProgress />
       </Box>
     );
@@ -60,7 +60,7 @@ export const Settings = () => {
   return (
     <div className="background-color">
     <form  onSubmit={handleSubmit}>
-      <h1>Host Settings</h1>
+      <h1>Game Settings</h1>
 
       <div className="form-container">
       <UsernameComp />
