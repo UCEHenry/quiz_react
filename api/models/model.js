@@ -53,7 +53,8 @@ class User {
             try {
                 let updateScore = await db.query(`UPDATE users
                                     SET score = $1
-                                    WHERE username = $2
+                                    WHERE username = $2 
+                                    AND score < $1
                                     RETURNING *;`, [ score, username ]);
                 let newScore = new User(updateScore.rows[0]);
                 resolve (newScore);
