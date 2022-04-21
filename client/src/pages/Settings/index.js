@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { Button, CircularProgress, Typography } from "@mui/material";
 import { SelectField } from "../../components";
@@ -6,12 +6,14 @@ import { TextFieldComp } from "../../components";
 import { UsernameComp } from "../../components";
 import useAxios from "../../hooks/useAxios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import './index.css';
 
 export const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
   const history = useNavigate();
-  // console.log(response)
+  // const playerCount = useSelector((state) => state.amountOfPlayers)
+  const dispatch = useDispatch
   if (loading) {
     return (
       <Box mt={20}>
@@ -57,6 +59,7 @@ export const Settings = () => {
     history("/quiz");
   };
 
+
   return (
     <div className="background-color">
       <form onSubmit={handleSubmit}>
@@ -64,7 +67,7 @@ export const Settings = () => {
 
         <div className="form-container">
           <SelectField options={localOrOnline} label="Local or Online" />
-          <SelectField options={amountOfPlayers} label="Amount of Players" />
+          <SelectField options={amountOfPlayers} label="Amount of Players" onChange={(e) => {dispatch(amountOfPlayers(e.target.value))}}/>
           <UsernameComp />
           <SelectField options={response.trivia_categories} label="Category" />
           <SelectField options={difficultyOptions} label="Difficulty" />

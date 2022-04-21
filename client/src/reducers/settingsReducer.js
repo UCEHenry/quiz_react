@@ -1,4 +1,4 @@
-import { CHANGE_CATEGORY, CHANGE_AMOUNT, CHANGE_DIFFICULTY, CHANGE_SCORE, CHANGE_TYPE } from '../actions/actionTypes';
+import { CHANGE_CATEGORY, CHANGE_AMOUNT, CHANGE_DIFFICULTY, CHANGE_SCORE, CHANGE_TYPE, CHANGE_PLAYERS } from '../actions/actionTypes';
 
 const initialState = {
   question_category: "",
@@ -6,7 +6,7 @@ const initialState = {
   question_type: "",
   amount_of_questions: 50,
   score: 0,
-  amount_of_players: 0,
+  amount_of_players: 1,
 };
 
 const settingsReducer = (state = initialState, action) => {
@@ -31,7 +31,7 @@ const settingsReducer = (state = initialState, action) => {
         ...state,
         amount_of_questions: action.payload,
       };
-    case "CHANGE_PLAYERS":
+    case CHANGE_PLAYERS:
       return {
         ...state,
         amount_of_players: action.payload,
