@@ -67,7 +67,6 @@ export const Settings = () => {
         <div className="form-container">
           <SelectField options={localOrOnline} label="Local or Online" />
           <SelectField options={amountOfPlayers} label="Amount of Players" onChange={(e) => {dispatch(amountOfPlayers(e.target.value))}}/>
-          <UsernameComp />
           <SelectField options={response.trivia_categories} label="Category" />
           <SelectField options={difficultyOptions} label="Difficulty" />
           <SelectField options={typeOptions} label="Type" />
