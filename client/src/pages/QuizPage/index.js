@@ -183,7 +183,7 @@ export const QuizPage = () => {
     return (
         <div className='section-background'>
             <section id='Quiz Page' className='container' >
-                <h1 id="quiz-title">Quiz Game</h1>
+                <h1 id="quiz-title">Quiz Wars</h1>
                 <h2>Time left: {displayTimer}</h2>
                 <Row>
                     <Col>

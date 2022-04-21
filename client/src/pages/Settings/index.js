@@ -17,7 +17,7 @@ export const Settings = () => {
   if (loading) {
     return (
       <Box mt={20}>
-        <h1>Host Settings</h1>
+        <h1>Game Settings</h1>
         <CircularProgress />
       </Box>
     );
@@ -62,9 +62,8 @@ export const Settings = () => {
 
   return (
     <div className="background-color">
-      <form onSubmit={handleSubmit}>
-        <h1>Host Settings</h1>
-
+    <form  onSubmit={handleSubmit}>
+      <h1>Game Settings</h1>
         <div className="form-container">
           <SelectField options={localOrOnline} label="Local or Online" />
           <SelectField options={amountOfPlayers} label="Amount of Players" onChange={(e) => {dispatch(amountOfPlayers(e.target.value))}}/>

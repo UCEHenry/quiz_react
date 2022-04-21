@@ -1,24 +1,26 @@
-.section-background{
+.section-background {
     height: calc(100vh - 56px);
-background-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0)), url("https://www.trainerbubble.com/wp-content/uploads/edd/2015/09/Logo-Quiz.jpg");
-background-repeat: no-repeat;
-background-size: cover;
-background-position: center;
+    background-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0)), url("https://www.trainerbubble.com/wp-content/uploads/edd/2015/09/Logo-Quiz.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
-#quiz-title{
+#quiz-title {
     color: #DC3545;
 }
 
-.col{
-    margin:20px;
-    
+.col {
+    margin: 20px;
+
 }
-.card-title, .card-body {
+
+.card-title,
+.card-body {
     text-align: center;
 }
 
 
-h2{
+h2 {
     color: white;
 }
