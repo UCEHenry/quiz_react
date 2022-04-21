@@ -59,14 +59,8 @@ export const Settings = () => {
 
   return (
     <div className="background-color">
-<<<<<<< HEAD
     <form  onSubmit={handleSubmit}>
       <h1>Game Settings</h1>
-=======
-      <form onSubmit={handleSubmit}>
-        <h1>Host Settings</h1>
->>>>>>> 2e136d4eba6292f53389032d88e71937d8981ef2
-
         <div className="form-container">
           <SelectField options={localOrOnline} label="Local or Online" />
           <SelectField options={amountOfPlayers} label="Amount of Players" />
