@@ -1,11 +1,12 @@
 
 import {combineReducers} from 'redux'
-import { counterReducer } from './counterReducer'
-import { readyButtonReducer } from './readyButtonReducer'
 import { playerReducer } from './playerReducer'
+import { gameStateReducer } from './gameStateReducer'
+import  settingsReducer from './settingsReducer'
+
 
 export const allReducer = combineReducers({
-    counter: counterReducer,
-    readyButton: readyButtonReducer,
-    players:playerReducer
+    players:playerReducer,
+    settingsReducer,
+    gameState: gameStateReducer
 })
