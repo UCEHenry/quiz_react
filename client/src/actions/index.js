@@ -41,5 +41,3 @@ export const playerAnswered = () => ({type:'PLAYER_ANSWERED'})
 export const amountOfPlayers = (amount) => ({type:'AMOUNT_OF_PLAYERS', payload: amount})
 export const username = (username) => ({type:'PLAYER_USERNAME', payload: username})
 export const localOrOnline = (localOrOnline) => ({type:'LOCAL_OR_ONLINE', payload: localOrOnline})
-
- 
