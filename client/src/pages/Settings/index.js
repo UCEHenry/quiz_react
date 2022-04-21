@@ -5,6 +5,7 @@ import { SelectField } from "../../components";
 import { TextFieldComp } from "../../components";
 import useAxios from "../../hooks/useAxios";
 import { useNavigate } from "react-router-dom";
+import './index.css';
 
 export const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
@@ -40,7 +41,7 @@ export const Settings = () => {
   ];
 
   const username = [
-    { id: "username", name: "Username" },
+    { id: "username", type: "input" },
   ];
 
   const difficultyOptions = [
@@ -60,8 +61,10 @@ export const Settings = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="background-color">
+    <form  onSubmit={handleSubmit}>
       <h1>Host Settings</h1>
+      <div className="form-container">
       <SelectField options={username} label="Username" />
       <SelectField options={localOrOnline} label="Local or Online" />
       <SelectField options={amountOfPlayers} label="Amount of Players" />
@@ -69,11 +72,13 @@ export const Settings = () => {
       <SelectField options={difficultyOptions} label="Difficulty" />
       <SelectField options={typeOptions} label="Type" />
       <TextFieldComp />
-      <Box mt={3} width="100%">
+      <Box mt={3} width="30%">
         <Button fullWidth variant="contained" type="submit">
           Get Started
         </Button>
       </Box>
+      </div>
     </form>
+    </div>
   );
 };
