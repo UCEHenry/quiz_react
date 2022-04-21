@@ -6,7 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, CircularProgress, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import axios from 'axios'
-import { incrementPlayerPoints, playerAnswered, selectAnswer } from '../../actions';
+import { useNavigate } from 'react-router-dom';
+import useAxios from '../../hooks/useAxios';
+import { handleScoreChange, incrementPlayerPoints } from '../../actions';
 
 export const QuizPage = () => {
     // Player state
@@ -30,6 +32,10 @@ export const QuizPage = () => {
     const [displayTimer, setDisplayTimer] = useState(10)
 
     const dispatch = useDispatch()
+    //const getScore()
+    //const updateScore() = state + 1 (parameter: playerScores.player)
+    //initial 0
+    //function as prop
 
     // if (questionsLeft.length == 0) {
     //     return (
@@ -199,6 +205,8 @@ export const QuizPage = () => {
                 <Col role={'questionArea'}>
                     {partyReady && questionToAnswer ? <QuestionCard role={'questionCard'} question={questionToAnswer} /> : <h2>ready up</h2>}
                 </Col>
+
+            
 
             </Row>
         </section>

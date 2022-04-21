@@ -2,16 +2,19 @@ import React from "react";
 import { Button, Card, ListGroup, } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { selectAnswer } from "../../actions";
+import { decode } from "html-entities"
+
 
 export const QuestionCard = ({ question }) => {
     const dispatch = useDispatch()
     const handleAnswerSelection = (id, answer) => {
         dispatch(selectAnswer(id, answer))
     }
+    
     return (
 
         <Card>
-            <Card.Header>{question.question}</Card.Header>
+            <Card.Header>{decode(question.question)}</Card.Header>
             <Card.Body>
                 <ListGroup>
                     {
@@ -24,3 +27,4 @@ export const QuestionCard = ({ question }) => {
         </Card>
     )
 }
+ //scoreUpdate + 1 if answer == correct answer
