@@ -22,8 +22,8 @@ class User {
     static createUser(username){
         return new Promise (async (resolve, reject) => {
             try {
-                let addUser = await db.query(`INSERT INTO users (username)
-                                    VALUES ($1)
+                let addUser = await db.query(`INSERT INTO users (username, score)
+                                    VALUES ($1, 0)
                                     RETURNING *;`, [ username ]);
                 let newUser = new User(addUser.rows[0]);
                 resolve (newUser);
