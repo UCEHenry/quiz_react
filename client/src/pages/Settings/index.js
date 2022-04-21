@@ -34,7 +34,7 @@ export const Settings = () => {
     { id: "online", name: "Online" },
   ];
 
-  const amountOfPlayers= [
+  const amountOfPlayers = [
     { id: "1", name: "1" },
     { id: "2", name: "2" },
     { id: "3", name: "3" },
@@ -59,24 +59,24 @@ export const Settings = () => {
 
   return (
     <div className="background-color">
-    <form  onSubmit={handleSubmit}>
-      <h1>Host Settings</h1>
+      <form onSubmit={handleSubmit}>
+        <h1>Host Settings</h1>
 
-      <div className="form-container">
-      <UsernameComp />
-      <SelectField options={localOrOnline} label="Local or Online" />
-      <SelectField options={amountOfPlayers} label="Amount of Players" />
-      <SelectField options={response.trivia_categories} label="Category" />
-      <SelectField options={difficultyOptions} label="Difficulty" />
-      <SelectField options={typeOptions} label="Type" />
-      <TextFieldComp />
-      <Box mt={3} width="30%">
-        <Button fullWidth variant="contained" type="submit">
-          Get Started
-        </Button>
-      </Box>
-      </div>
-    </form>
+        <div className="form-container">
+          <SelectField options={localOrOnline} label="Local or Online" />
+          <SelectField options={amountOfPlayers} label="Amount of Players" />
+          <UsernameComp />
+          <SelectField options={response.trivia_categories} label="Category" />
+          <SelectField options={difficultyOptions} label="Difficulty" />
+          <SelectField options={typeOptions} label="Type" />
+          <TextFieldComp />
+          <Box mt={3} width="30%">
+            <Button fullWidth variant="contained" type="submit">
+              Get Started
+            </Button>
+          </Box>
+        </div>
+      </form>
     </div>
   );
 };

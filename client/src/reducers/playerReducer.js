@@ -4,7 +4,7 @@ const initState = [{ 'id': 0, 'name': 'Idris', 'points': 0, 'isReady': false, 's
 { 'id': 3, 'name': 'Marco', 'points': 0, 'isReady': false, 'selectedAnswer':''}]
 
 
-export const playerReducer = (state=initState, action) => {
+export const playerReducer = (state=[], action) => {
 
     const playerTo = (state, action) => {
         const playerTofind = state.find(p => p.id === action.payload)
@@ -39,6 +39,16 @@ export const playerReducer = (state=initState, action) => {
                 ...state.slice(playerToSelectAnswer[1]+1)
             ]
             return state = updateSelectedAnswer
+        case 'CREATE_PLAYER':
+            if(state.length !== 0) {
+                const playerId = state.length + 1
+            } else {
+                const playerId = 0
+            }
+            const playerId = state.length + 1
+            const playerDetails = { 'id': playerId, 'name': action.payload, 'points': 0, 'isReady': false, 'selectedAnswer':'' }
+            state.push(playerDetails)
+            return state
         default:
             return state
     }

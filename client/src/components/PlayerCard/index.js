@@ -20,15 +20,17 @@ export const PlayerCard = ({ player, partyReady, currentPlayerId }) => {
     }
 
     const highlightPlayer = () => {
-        const cardHighlight = '';
-        if (player.id === currentPlayerId) {
-            cardHighlight = 'border border-5 border-warning'
+
+        if (player.id === currentPlayerId && partyReady) {
+            return 'border border-5 border-warning w-75'
+        } else {
+            return 'w-50'
         }
-        return cardWidth
+
     }
 
     return (
-        <Card role={`PlayerCard_${player.name}`} id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className={`text-start ${highlightPlayer}`}>
+        <Card role={`PlayerCard_${player.name}`} id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className={`text-start ${highlightPlayer()}`}>
 
             <Card.Title>{player.name}</Card.Title>
             {partyReady ? <Card.Body role={`playerScore_${player.name}`}>{player.points}</Card.Body> : <Button role={`playerReadyButton_${player.name}`} className={readyButtonColour()} onClick={() => handleToggle(player.id)}>Readyup</Button>}

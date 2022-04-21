@@ -39,5 +39,5 @@ export const incrementPlayerPoints = playerId => ({type: 'INCREMENT_PLAYER_POINT
 export const selectAnswer = (playerId, answer) => ({type: 'SELECT_ANSWER', payload: playerId, answer:answer})
 export const gameOver = () => ({type:'GAME_OVER'})
 export const amountOfPlayers = (amount) => ({type:'AMOUNT_OF_PLAYERS', payload: amount})
-export const usernameInput = (username) => ({type:'PLAYER_USERNAME', payload: username})
+export const usernameInput = (username) => ({type:'CREATE_PLAYER', payload: username})
 export const localOrOnline = (localOrOnline) => ({type:LOCAL_OR_ONLINE, payload: localOrOnline})
