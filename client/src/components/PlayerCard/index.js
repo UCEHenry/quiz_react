@@ -1,9 +1,10 @@
+import { border } from '@mui/system';
 import React from 'react'
 import { Button, Card, Row } from 'react-bootstrap/'
 import { useSelector, useDispatch } from 'react-redux';
 import { togglePlayerReady } from "../../actions";
 
-export const PlayerCard = ({ player, partyReady }) => {
+export const PlayerCard = ({ player, partyReady, currentPlayerId }) => {
 
     const dispatch = useDispatch()
     const handleToggle = (id) => {
@@ -13,16 +14,24 @@ export const PlayerCard = ({ player, partyReady }) => {
     const readyButtonColour = () => {
         if (player.isReady) {
             return 'btn-success'
-        } else{
+        } else {
             return 'btn-danger'
         }
     }
 
-    return (
-        <Card role={`PlayerCard_${player.name}`} id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className="text-start">
+    const highlightPlayer = () => {
+        const cardHighlight = '';
+        if (player.id === currentPlayerId) {
+            cardHighlight = 'border border-5 border-warning'
+        }
+        return cardWidth
+    }
 
-            <Card.Title>{player.name}</Card.Title> 
-            {partyReady? <Card.Body role={`playerScore_${player.name}`}>{player.points}</Card.Body> : <Button role={`playerReadyButton_${player.name}`} className={readyButtonColour()} onClick={()=>handleToggle(player.id)}>Readyup</Button>}
+    return (
+        <Card role={`PlayerCard_${player.name}`} id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className={`text-start ${highlightPlayer}`}>
+
+            <Card.Title>{player.name}</Card.Title>
+            {partyReady ? <Card.Body role={`playerScore_${player.name}`}>{player.points}</Card.Body> : <Button role={`playerReadyButton_${player.name}`} className={readyButtonColour()} onClick={() => handleToggle(player.id)}>Readyup</Button>}
         </Card>
     )
 }
