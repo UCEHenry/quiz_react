@@ -53,8 +53,7 @@ class User {
             try {
                 let updateScore = await db.query(`UPDATE users
                                     SET score = $1
-                                    WHERE username = $2 
-                                    AND score < $1
+                                    WHERE username = $2
                                     RETURNING *;`, [ score, username ]);
                 let newScore = new User(updateScore.rows[0]);
                 resolve (newScore);
@@ -62,6 +61,21 @@ class User {
                 reject('User not found');
             }
         });
+    };
+
+    static get usersTopTen(){ 
+        return new Promise (async (resolve, reject) => {
+            try {
+                const result = await db.query(`SELECT username, score
+                                                    FROM users
+                                                    ORDER BY score DESC
+                                                    LIMIT 10;`)
+                const users = result.rows.map(user => ({ username: user.username, score: user.score }))
+                resolve(users);
+            } catch (err) {
+                reject("Error retrieving users")
+            }
+        })
     };
 }
 
