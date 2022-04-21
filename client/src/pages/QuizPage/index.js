@@ -190,7 +190,7 @@ export const QuizPage = () => {
                         <Row xs={1} md={1}>
                             {players.map(playerData => (
                                 <Col role={`PlayerElement_${playerData.name}`} key={playerData.id}>
-                                    <PlayerCard player={playerData} partyReady={partyReady} />
+                                    <PlayerCard player={playerData} partyReady={partyReady} currentPlayerId={currentPlayer} />
                                 </Col>
                             ))}
                         </Row>
