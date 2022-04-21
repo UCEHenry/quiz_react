@@ -16,6 +16,7 @@ export const FinalPage = () => {
     dispatch(handleScoreChange(0));
     dispatch(handleAmountChange(50));
     navigate("/settings");
+    retrieveTopTen()
     console.log(players)
   };
 
@@ -32,12 +33,9 @@ export const FinalPage = () => {
   }
   const retrieveTopTen = async () => {
     try{
-      
-      // const resp = await axios.get('https://fpquizwar.herokuapp.com/users')
-      
-
+      const resp = await axios.get('https://fpquizwar.herokuapp.com/users/topten')
     } catch (err) {
-
+      console.log(err)
     }
   }
 
