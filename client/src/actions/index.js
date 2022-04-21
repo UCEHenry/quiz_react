@@ -34,4 +34,4 @@ export const handleScoreChange = payload => ({
 export const togglePlayerReady = playerId => ({type: 'TOGGLE_READY', payload: playerId})
 export const incrementPlayerPoints = playerId => ({type: 'INCREMENT_PLAYER_POINT', payload: playerId})
 export const selectAnswer = (playerId, answer) => ({type: 'SELECT_ANSWER', payload: playerId, answer:answer})
-export const playerAnswered = () => ({type:'PLAYER_ANSWERED'})
+export const gameOver = () => ({type:'GAME_OVER'})
