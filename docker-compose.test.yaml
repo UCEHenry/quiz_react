@@ -1,8 +1,8 @@
 services:
   api:
-    container_name: demo_test_api
+    container_name: debug_test_api
     environment: 
-      - PGUSER=user
+      - PGUSER=admin
       - PGHOST=db
       - PGPASSWORD=userpass
       - PGDATABASE=user_test
@@ -12,7 +12,7 @@ services:
       - db
     tty: true
   db:
-    container_name: test_db
+    container_name: debug_test_db
     volumes:
       - "test_db:/var/lib/postgresql/data"
     environment: 
@@ -22,4 +22,4 @@ volumes:
   test_db:
 networks: 
   default:
-    name: app_test
+    name: debug_test

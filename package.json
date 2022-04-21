@@ -1,0 +1,19 @@
+{
+  "name": "quiz_react",
+  "version": "1.0.0",
+  "description": "# LAP 3 Portfolio Week Project You will be working in small teams to create an online quiz game in React.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UCEHenry/quiz_react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UCEHenry/quiz_react/issues"
+  },
+  "homepage": "https://github.com/UCEHenry/quiz_react#readme"
+}

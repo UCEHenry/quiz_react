@@ -9,7 +9,7 @@ const config = {
   entry: [path.resolve(__dirname, '../src/index.js')], // the main JavaScript file of the project
   output: {
     // instructions for compiling the code
-    path: path.resolve(__dirname, '../dist'), // the file where the compiled code should go
+    path: path.resolve(__dirname, '../build'), // the file where the compiled code should go
     filename: 'bundle.js', // the file name of the compiled code
     publicPath: '/', // specifies the base path for all the assets within your application.
   },
@@ -26,9 +26,7 @@ const config = {
     // plugins we are using to help with compiling
     new HtmlWebpackPlugin({
       // used to add the JavaScript code to the HTML
-      template: path.join(PUBLIC_DIRECTORY, 'index.html'),
-      // Added a favicon
-      favicon: "./src/images/favicon.jpg"
+      template: path.join(PUBLIC_DIRECTORY, 'index.html')
     }),
   ],
   module: {

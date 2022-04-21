@@ -1,0 +1,121 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "category": "Entertainment: Film",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Which animated movie was first to feature a celebrity as a voice actor?",
+            "correct_answer": "Aladdin",
+            "incorrect_answers": [
+                "Toy Story",
+                "James and the Giant Peach",
+                "The Hunchback of Notre Dame"
+            ]
+        },
+        {
+            "category": "Vehicles",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Which of the following collision avoidance systems helps airplanes avoid colliding with each other?",
+            "correct_answer": "TCAS",
+            "incorrect_answers": [
+                "GPWS",
+                "OCAS",
+                "TAWS"
+            ]
+        },
+        {
+            "category": "Entertainment: Video Games",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What year did the game &quot;Overwatch&quot; enter closed beta?",
+            "correct_answer": "2015",
+            "incorrect_answers": [
+                "2013",
+                "2011",
+                "2016"
+            ]
+        },
+        {
+            "category": "History",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Joseph Stalin had a criminal past doing what?",
+            "correct_answer": "Robbing Trains",
+            "incorrect_answers": [
+                "Murder for Hire",
+                "Tax Evasion",
+                "Identity Fraud"
+            ]
+        },
+        {
+            "category": "Science & Nature",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "The core of the Sun can reach which temperature?",
+            "correct_answer": "27&deg; Million F (15&deg; Million C)",
+            "incorrect_answers": [
+                "938,000&deg; F (521093.3&deg; C)",
+                "8&deg; Billion F (&deg;4.4 Billion C)",
+                "Absolute Zero (Both F and C)"
+            ]
+        },
+        {
+            "category": "Entertainment: Japanese Anime & Manga",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What year did the anime &quot;Himouto! Umaru-chan&quot; air?",
+            "correct_answer": "2015",
+            "incorrect_answers": [
+                "2014",
+                "2012",
+                "2013"
+            ]
+        },
+        {
+            "category": "Entertainment: Video Games",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What was the name of the protagonist of Metal Gear Solid V: The Phantom Pain?",
+            "correct_answer": "Punished &quot;Venom&quot; Snake",
+            "incorrect_answers": [
+                "Miller",
+                "Solid Snake",
+                "Ocelot"
+            ]
+        },
+        {
+            "category": "Entertainment: Music",
+            "type": "boolean",
+            "difficulty": "easy",
+            "question": "Daft Punk originated in France.",
+            "correct_answer": "True",
+            "incorrect_answers": [
+                "False"
+            ]
+        },
+        {
+            "category": "History",
+            "type": "boolean",
+            "difficulty": "hard",
+            "question": "The man that shot Alexander Hamilton was named Aaron Burr.",
+            "correct_answer": "True",
+            "incorrect_answers": [
+                "False"
+            ]
+        },
+        {
+            "category": "Animals",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the world&#039;s longest venomous snake?",
+            "correct_answer": "King Cobra",
+            "incorrect_answers": [
+                "Green Anaconda",
+                "Inland Taipan",
+                "Yellow Bellied Sea Snake"
+            ]
+        }
+    ]
+}
