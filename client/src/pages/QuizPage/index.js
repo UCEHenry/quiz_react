@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { PlayerCard, QuestionCard } from '../../components'
-import { CardGroup, Row, Col, Container } from 'react-bootstrap'
-import quizDataResp from '../../assets/testData/questions.json'
+import { Row, Col} from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, CircularProgress, Typography } from "@mui/material"
-import { Box } from "@mui/system"
+
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-import useAxios from '../../hooks/useAxios';
-import { handleScoreChange, incrementPlayerPoints } from '../../actions';
+
+import { gameOver, incrementPlayerPoints } from '../../actions';
 
 export const QuizPage = () => {
     // Player state
@@ -29,13 +27,10 @@ export const QuizPage = () => {
     const [questionToAnswer, setQuestionToAnswer] = useState('')
     const [answerData, setAnswerData] = useState([])
     const [partyReady, setPartyReady] = useState(false)
-    const [displayTimer, setDisplayTimer] = useState(10)
+    const [displayTimer, setDisplayTimer] = useState(5)
 
     const dispatch = useDispatch()
-    //const getScore()
-    //const updateScore() = state + 1 (parameter: playerScores.player)
-    //initial 0
-    //function as prop
+    const redirect = useNavigate()
 
     // if (questionsLeft.length == 0) {
     //     return (
@@ -112,23 +107,20 @@ export const QuizPage = () => {
             if (player.selectedAnswer === correctAnswer.answers) {
                 console.log("score!: ", player.id)
                 dispatch(incrementPlayerPoints(player.id))
-                // dispatch(playerAnswered)
             } else {
                 console.log('oops')
             }
         }
     };
     const nextQuestion = () => {
+        console.log('question to answer id:', questionToAnswer.id)
+        console.log('question lefts:', questionsLeft.length -1)
+        if(questionToAnswer.id == questionsLeft.length -1){
 
-        const randQuestIdx = Math.floor(Math.random() * questionsLeft.length + 1)
-        setQuestionToAnswer(questionsLeft[randQuestIdx])
-        setQuestionsLeft(questionsLeft.splice(randQuestIdx,1))
-        // if (gameState === players.length) {
-        //     setQuestionToAnswer(questionsLeft[randQuestIdx])
-        //     setQuestionsLeft(questionsLeft.splice(randQuestIdx,1))
-        // } else {
-        //     // dispatch(playerAnswered)
-        // }
+            dispatch(gameOver())
+        } else {
+            setQuestionToAnswer(questionsLeft[questionToAnswer.id + 1])
+        }
     }
 
     const countdown = () => {
@@ -168,24 +160,25 @@ export const QuizPage = () => {
             }, 1000)
             return () => clearTimeout(timer)
         } else if (displayTimer === 0) {
-            handleClickAnswer()
+            // handleClickAnswer()
             const dealWithResultsTimer = setTimeout(()=>{
+                handleClickAnswer()
                 nextQuestion()
-                setDisplayTimer(10)
+                setDisplayTimer(5)
             }, 5000)
             return ()=> clearTimeout(dealWithResultsTimer)
-
+            
         }
         console.log('change state')
     })
     
-    // useEffect(()=>{
-    //     if (partyReady) {
-    //         // handleClickAnswer()
-    //         // nextQuestion()
-    //     }
-    //     console.log('change to game state')
-    // },[gameState])
+    useEffect(()=>{
+        console.log('change to game state')
+        if (partyReady) {
+            console.log('game over')
+            redirect('/score')
+        }
+    },[gameState])
 
     return (
         <section id='Quiz Page' className='container' >

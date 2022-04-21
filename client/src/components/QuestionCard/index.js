@@ -14,7 +14,7 @@ export const QuestionCard = ({ question }) => {
     return (
 
         <Card>
-            <Card.Header>{decode(question.question)}</Card.Header>
+            <Card.Header>Question {question.id + 1}: {decode(question.question)}</Card.Header>
             <Card.Body>
                 <ListGroup>
                     {
