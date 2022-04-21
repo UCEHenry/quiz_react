@@ -5,15 +5,14 @@ import quizDataResp from '../../assets/testData/questions.json'
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, CircularProgress, Typography } from "@mui/material"
 import { Box } from "@mui/system"
-import { decode } from "html-entities"
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
-import useAxios from '../../hooks/useAxios';
-import { incrementPlayerPoints } from '../../actions';
+import { incrementPlayerPoints, playerAnswered, selectAnswer } from '../../actions';
 
 export const QuizPage = () => {
     // Player state
     const players = useSelector(state => state.players)
+    // Game state
+    const gameState = useSelector(state => state.gameState)
 
     // Quiz settings
     const {
@@ -24,12 +23,32 @@ export const QuizPage = () => {
         score
     } = useSelector((state) => state.settingsReducer);
 
-
     const [questionsLeft, setQuestionsLeft] = useState([])
     const [questionToAnswer, setQuestionToAnswer] = useState('')
     const [answerData, setAnswerData] = useState([])
     const [partyReady, setPartyReady] = useState(false)
+    const [displayTimer, setDisplayTimer] = useState(120)
+
     const dispatch = useDispatch()
+
+    if (!questionsLeft) {
+        <Box mt={20}>
+            <CircularProgress />
+        </Box>
+    }
+
+    // Randomises the position of the answers in an array.
+    const answerRandomiser = (question) => {
+        const answers = question['incorrect_answers'].concat([question['correct_answer']]);
+
+        for (var i = answers.length - 1; i > 0; i--) {
+            const randIndex = Math.floor(Math.random() * (i + 1))
+            const temp = answers[i]
+            answers[i] = answers[randIndex]
+            answers[randIndex] = temp
+        }
+        return answers
+    }
 
     // Fomats quiz data mixing correct and incorrect answers together while also removing other unecessary bits of info.
     const quizDataFormatter = (quizData) => {
@@ -59,24 +78,10 @@ export const QuizPage = () => {
                 apiUrl = apiUrl.concat(`&type=${question_type}`)
             }
             const resp = await axios.get(`https://opentdb.com${apiUrl}`)
-            console.log(resp)
             quizDataFormatter(resp.data.results)
         } catch (err) {
             console.log(err)
         }
-    }
-
-    // Randomises the position of the answers in an array.
-    const answerRandomiser = (question) => {
-        const answers = question['incorrect_answers'].concat([question['correct_answer']]);
-
-        for (var i = answers.length - 1; i > 0; i--) {
-            const randIndex = Math.floor(Math.random() * (i + 1))
-            const temp = answers[i]
-            answers[i] = answers[randIndex]
-            answers[randIndex] = temp
-        }
-        return answers
     }
 
     // Checks to see how many players are ready. if all are ready then question board is shown.
@@ -92,49 +97,86 @@ export const QuizPage = () => {
             setPartyReady(true)
         }
     }
-    // Gets quiz data from api on load.
-    useEffect(() => {
-        getQuestions(question_category, question_difficulty, question_type, amount_of_questions)
-
-    }, [])
-    // checks if all players are ready // TODO currently this also deals with checking if player has chosen an answer however this also changes the question everytime a button is pressed. not good.
-    useEffect(() => {
-        handlePartyReady(players)
-        console.log('change to players state')
-        if (partyReady) {
-            handleClickAnswer()
-            const randQuestIdx = Math.floor(Math.random() * questionsLeft.length + 1)
-            setQuestionToAnswer(questionsLeft[randQuestIdx])
-            
-        } else {
-            setQuestionToAnswer(questionsLeft[0])
-        }
-    }, [players])
-
-    // if (loading) {
-    //     <Box mt={20}>
-    //         <CircularProgress />
-    //     </Box>
-    // }
 
     const handleClickAnswer = () => {
         const correctAnswer = answerData.find(answer => answer.id === questionToAnswer.id);
-
-        console.log(correctAnswer.answers)
-        console.log(players[0].selectedAnswer)
         for (const player of players) {
             if (player.selectedAnswer === correctAnswer.answers) {
                 console.log("score!: ", player.id)
                 dispatch(incrementPlayerPoints(player.id))
+                // dispatch(playerAnswered)
             } else {
                 console.log('oops')
             }
         }
     };
+    const nextQuestion = () => {
+
+        const randQuestIdx = Math.floor(Math.random() * questionsLeft.length + 1)
+
+        if (gameState === players.length) {
+            setQuestionToAnswer(questionsLeft[randQuestIdx])
+            setQuestionsLeft(questionsLeft.splice(randQuestIdx,1))
+        } else {
+            dispatch(playerAnswered)
+        }
+    }
+
+    const countdown = () => {
+        if (partyReady) {
+            const timer = setTimeout(()=> {
+                handleClickAnswer()
+                setDisplayTimer(displayTimer - 1)
+                console.log(displayTimer)
+            }, 3000)
+            return () => clearTimeout(timer)
+        }
+    }
+
+    // Gets quiz data from api on load.
+    useEffect(() => {
+        getQuestions(question_category, question_difficulty, question_type, amount_of_questions)
+        setQuestionToAnswer(questionsLeft[0])
+        console.log('load')
+    }, [])
+
+
+    // checks if all players are ready // TODO currently this also deals with checking if player has chosen an answer however this also changes the question everytime a button is pressed. not good.
+    useEffect(() => {
+        handlePartyReady(players)
+        
+        console.log('change to players state')
+        
+    }, [players])
+
+    useEffect(()=>{
+        if (partyReady && displayTimer != 0) {
+            const timer = setTimeout(()=> {
+                // handleClickAnswer()
+                setDisplayTimer(displayTimer - 1)
+                console.log(displayTimer)
+            }, 1000)
+            return () => clearTimeout(timer)
+        } else if (displayTimer === 0) {
+            
+            nextQuestion()
+            handleClickAnswer()
+        }
+        console.log('change state')
+    })
+    
+    useEffect(()=>{
+        if (partyReady) {
+            // handleClickAnswer()
+            // nextQuestion()
+        }
+        console.log('change to game state')
+    },[gameState])
 
     return (
         <section id='Quiz Page' className='container' >
             <h1>quiz page</h1>
+            <h2>Time left: {displayTimer}</h2>
             <Row>
                 <Col>
                     <Row xs={1} md={1}>
@@ -147,7 +189,7 @@ export const QuizPage = () => {
                 </Col>
 
                 <Col role={'questionArea'}>
-                    {partyReady && questionToAnswer ? <QuestionCard role={'questionCard'}  question={questionToAnswer} /> : <h2>ready up</h2>}
+                    {partyReady && questionToAnswer ? <QuestionCard role={'questionCard'} question={questionToAnswer} /> : <h2>ready up</h2>}
                 </Col>
 
             </Row>

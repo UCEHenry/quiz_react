@@ -12,8 +12,7 @@ const useAxios = ({ url }) => {
       const fetchData = () => {
           axios 
           .get(url)
-          .then(res => {setResponse(res.data) 
-            console.log("response data: ",res)})
+          .then(res => {setResponse(res.data)})
           .catch(err => setError(err))
           .finally(() => setLoading(false))
       }

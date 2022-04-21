@@ -6,9 +6,7 @@ import { togglePlayerReady } from "../../actions";
 export const PlayerCard = ({ player, partyReady }) => {
 
     const dispatch = useDispatch()
-    const handleToggle = (id) => 
-    {
-        
+    const handleToggle = (id) => {
         dispatch(togglePlayerReady(id))
     }
 
