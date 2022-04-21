@@ -1,8 +1,8 @@
 
-export const gameStateReducer = (state=0, action) => {
+export const gameStateReducer = (state=false, action) => {
     switch(action.type) {
-        case 'PLAYER_ANSWERED':
-            return state + 1
+        case 'GAME_OVER':
+            return state = !state
         default:
             return state
     }

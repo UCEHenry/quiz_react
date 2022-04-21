@@ -29,6 +29,7 @@ export const playerReducer = (state=initState, action) => {
                 {...playerToIncrement[0], points: playerToIncrement[0].points + 1},
                 ...state.slice(playerToIncrement[1]+1)
             ]
+            console.log(updatePlayerPoints)
             return state = updatePlayerPoints
         case 'SELECT_ANSWER':
             const playerToSelectAnswer = playerTo(state, action)

@@ -28,6 +28,22 @@ export const Settings = () => {
     );
   }
 
+  const localOrOnline = [
+    { id: "local", name: "Local" },
+    { id: "online", name: "Online" },
+  ];
+
+  const amountOfPlayers= [
+    { id: "1", name: "1" },
+    { id: "2", name: "2" },
+    { id: "3", name: "3" },
+    { id: "4", name: "4" },
+  ];
+
+  const username = [
+    { id: "username", type: "input" },
+  ];
+
   const difficultyOptions = [
     { id: "easy", name: "Easy" },
     { id: "medium", name: "Medium" },
@@ -49,6 +65,9 @@ export const Settings = () => {
     <form  onSubmit={handleSubmit}>
       <h1>Host Settings</h1>
       <div className="form-container">
+      <SelectField options={username} label="Username" />
+      <SelectField options={localOrOnline} label="Local or Online" />
+      <SelectField options={amountOfPlayers} label="Amount of Players" />
       <SelectField options={response.trivia_categories} label="Category" />
       <SelectField options={difficultyOptions} label="Difficulty" />
       <SelectField options={typeOptions} label="Type" />
