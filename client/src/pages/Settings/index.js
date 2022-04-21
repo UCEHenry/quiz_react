@@ -61,12 +61,9 @@ export const Settings = () => {
     <div className="background-color">
     <form  onSubmit={handleSubmit}>
       <h1>Host Settings</h1>
-<<<<<<< HEAD
-      <UsernameComp />
-=======
+
       <div className="form-container">
-      <SelectField options={username} label="Username" />
->>>>>>> 27b767f1b56a81471ac1d2644a7f022d2adf747d
+      <UsernameComp />
       <SelectField options={localOrOnline} label="Local or Online" />
       <SelectField options={amountOfPlayers} label="Amount of Players" />
       <SelectField options={response.trivia_categories} label="Category" />

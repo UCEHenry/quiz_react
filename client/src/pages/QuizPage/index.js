@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-
+import './index.css'
 import { gameOver, incrementPlayerPoints } from '../../actions';
 import { stepConnectorClasses } from '@mui/material';
 
