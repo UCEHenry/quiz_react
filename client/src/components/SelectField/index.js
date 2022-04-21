@@ -15,6 +15,15 @@ export const SelectField = (props) => {
       case "Category":
         dispatch(handleCategoryChange(e.target.value));
         break;
+      case "Local or Online":
+        dispatch(handleCategoryChange(e.target.value));
+        break;
+      case "Amount of Players":
+        dispatch(handleCategoryChange(e.target.value));
+        break;
+      case "Username":
+        dispatch(handleDifficultyChange(e.target.value));
+        break;
       case "Difficulty":
         dispatch(handleDifficultyChange(e.target.value));
         break;
