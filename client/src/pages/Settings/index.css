@@ -1,0 +1,31 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto Mono', monospace !important;
+   
+}
+
+body{
+    margin: 0 auto !important;
+}
+
+.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root, .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root, .css-q8hpuo-MuiFormControl-root  {
+    width: 300px  !important;
+}
+
+.css-hj1buz{
+    margin: 20px auto;
+    width: 200px !important;
+}
+
+.background-color{
+height: calc(100vh - 56px);
+background-image: url("https://images.unsplash.com/photo-1539628399213-d6aa89c93074?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80");
+}
+
+h1{
+    padding-top: 20px;
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+}

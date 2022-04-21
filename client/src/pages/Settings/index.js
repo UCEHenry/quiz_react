@@ -6,6 +6,7 @@ import { TextFieldComp } from "../../components";
 import { UsernameComp } from "../../components";
 import useAxios from "../../hooks/useAxios";
 import { useNavigate } from "react-router-dom";
+import './index.css';
 
 export const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
@@ -57,20 +58,28 @@ export const Settings = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="background-color">
+    <form  onSubmit={handleSubmit}>
       <h1>Host Settings</h1>
+<<<<<<< HEAD
       <UsernameComp />
+=======
+      <div className="form-container">
+      <SelectField options={username} label="Username" />
+>>>>>>> 27b767f1b56a81471ac1d2644a7f022d2adf747d
       <SelectField options={localOrOnline} label="Local or Online" />
       <SelectField options={amountOfPlayers} label="Amount of Players" />
       <SelectField options={response.trivia_categories} label="Category" />
       <SelectField options={difficultyOptions} label="Difficulty" />
       <SelectField options={typeOptions} label="Type" />
       <TextFieldComp />
-      <Box mt={3} width="100%">
+      <Box mt={3} width="30%">
         <Button fullWidth variant="contained" type="submit">
           Get Started
         </Button>
       </Box>
+      </div>
     </form>
+    </div>
   );
 };

@@ -125,7 +125,7 @@ export const QuizPage = () => {
 
     const countdown = () => {
         if (partyReady) {
-            const timer = setTimeout(()=> {
+            const timer = setTimeout(() => {
                 handleClickAnswer()
                 setDisplayTimer(displayTimer - 1)
                 console.log(displayTimer)
@@ -136,7 +136,7 @@ export const QuizPage = () => {
 
     // Gets quiz data from api on load.
     useEffect(() => {
-        getQuestions(question_category, question_difficulty, question_type, amount_of_questions)       
+        getQuestions(question_category, question_difficulty, question_type, amount_of_questions)
         console.log('load')
     }, [])
 
@@ -144,16 +144,16 @@ export const QuizPage = () => {
     // checks if all players are ready // TODO currently this also deals with checking if player has chosen an answer however this also changes the question everytime a button is pressed. not good.
     useEffect(() => {
         handlePartyReady(players)
-        
+
         console.log('change to players state')
-        
+
     }, [players])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!partyReady) {
             setQuestionToAnswer(questionsLeft[0])
         } else if (partyReady && displayTimer != 0) {
-            const timer = setTimeout(()=> {
+            const timer = setTimeout(() => {
                 // handleClickAnswer()
                 setDisplayTimer(displayTimer - 1)
                 console.log(displayTimer)
@@ -181,27 +181,26 @@ export const QuizPage = () => {
     },[gameState])
 
     return (
-        <section id='Quiz Page' className='container' >
-            <h1>quiz page</h1>
-            <h2>Time left: {displayTimer}</h2>
-            <Row>
-                <Col>
-                    <Row xs={1} md={1}>
-                        {players.map(playerData => (
-                            <Col role={`PlayerElement_${playerData.name}`} key={playerData.id}>
-                                <PlayerCard player={playerData} partyReady={partyReady} />
-                            </Col>
-                        ))}
-                    </Row>
-                </Col>
+        <div className='section-background'>
+            <section id='Quiz Page' className='container' >
+                <h1 id="quiz-title">Quiz Game</h1>
+                <h2>Time left: {displayTimer}</h2>
+                <Row>
+                    <Col>
+                        <Row xs={1} md={1}>
+                            {players.map(playerData => (
+                                <Col role={`PlayerElement_${playerData.name}`} key={playerData.id}>
+                                    <PlayerCard player={playerData} partyReady={partyReady} />
+                                </Col>
+                            ))}
+                        </Row>
+                    </Col>
 
-                <Col role={'questionArea'}>
-                    {partyReady && questionToAnswer ? <QuestionCard role={'questionCard'} question={questionToAnswer} /> : <h2>ready up</h2>}
-                </Col>
-
-            
-
-            </Row>
-        </section>
+                    <Col role={'questionArea'}>
+                        {partyReady && questionToAnswer ? <QuestionCard role={'questionCard'} question={questionToAnswer} /> : <h2>ready up</h2>}
+                    </Col>
+                </Row>
+            </section>
+        </div>
     )
 }
