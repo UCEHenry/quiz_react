@@ -14,7 +14,7 @@ export const QuizPage = () => {
     const players = useSelector(state => state.players)
     // Game state
     const gameState = useSelector(state => state.gameState)
-
+    const timer = 30
     // Quiz settings
     const {
         question_category,
@@ -27,7 +27,7 @@ export const QuizPage = () => {
     const [questionToAnswer, setQuestionToAnswer] = useState('')
     const [answerData, setAnswerData] = useState([])
     const [partyReady, setPartyReady] = useState(false)
-    const [displayTimer, setDisplayTimer] = useState(5)
+    const [displayTimer, setDisplayTimer] = useState(timer)
     const [currentPlayer, setCurrentPlayer] = useState(0)
 
     const dispatch = useDispatch()
@@ -111,14 +111,7 @@ export const QuizPage = () => {
             } else {
                 console.log('oops')
             }
-        // for (const player of players) {
-        //     if (player.selectedAnswer === correctAnswer.answers) {
-        //         console.log("score!: ", player.id)
-        //         dispatch(incrementPlayerPoints(player.id))
-        //     } else {
-        //         console.log('oops')
-        //     }
-        // }
+
     };
     const nextQuestion = () => {
         console.log(`question:${questionToAnswer.id + 1}/${questionsLeft.length}`)
@@ -164,7 +157,7 @@ export const QuizPage = () => {
             const dealWithResultsTimer = setTimeout(()=>{
                 handleClickAnswer()
                 nextQuestion()
-                setDisplayTimer(5)
+                setDisplayTimer(timer)
             }, 5000)
             return ()=> clearTimeout(dealWithResultsTimer)
             
