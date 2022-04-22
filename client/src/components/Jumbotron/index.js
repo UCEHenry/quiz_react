@@ -1,5 +1,4 @@
 import React from 'react'
-// import heroImage from '../../assets/images/placeholder.jpg'
 import Button from 'react-bootstrap/Button'
 import './style.css'
 import { useNavigate } from "react-router";
