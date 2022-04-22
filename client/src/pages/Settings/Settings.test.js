@@ -15,25 +15,24 @@ describe('Settings Page', () => {
     // })
 
     test('Render Settings page', () => {
-        // let initState = {players: [],   settingsReducer: {
-        //     question_category: '',
-        //     question_difficulty: '',
-        //     question_type: '',
-        //     amount_of_questions: 50,
-        //     score: 0
-        //   }}
-        // renderWithReduxProvider(<Router><Settings/></Router>, {initState})
-        // const settingsPage = screen.getByText(/Host/i);
-        // expect(settingsPage).toBeInTheDocument();
+        let initState = {players: [],   settingsReducer: {
+            question_category: '',
+            question_difficulty: '',
+            question_type: '',
+            amount_of_questions: 50,
+            score: 0
+          }}
+        renderWithReduxProvider(<Settings/>, {initState})
+        const settingsPage = screen.getByText(/Game Settings/i);
+        expect(settingsPage).toBeInTheDocument();
     })
-    test('Checks "Catergory" has 29 options', async () => {
-        axiosMock.get.mockResolvedValueOnce({data:triviaData})
+    test('Checks "Catergory" has 24 options', async () => {
+        // axiosMock.get.mockResolvedValueOnce({data:triviaData})
 
-        renderWithReduxProvider(<Settings/>)
+        // renderWithReduxProvider(<Settings/>)
 
-        const categoryDropDown = await waitFor(()=>screen.findByLabelText('Category'))
-        console.log(categoryDropDown)
-        // expect(counter).toEqual(counter)
-
+        // const categoryDropDown = await waitFor(()=>screen.findByLabelText('Category'))
+        // console.log(categoryDropDown)
+        // // expect(counter).toEqual(counter)
     })
 })

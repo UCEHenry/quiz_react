@@ -44,7 +44,7 @@ describe('Quiz Page', () => {
     test('Render initial quiz page', async () => {
         // axiosMock.get.mockResolvedValueOnce(quizData)
         renderWithReduxProvider(<QuizPage />, { initState })
-        const quizPage = screen.getByText(/quiz page/i);
+        const quizPage = screen.getByText(/quiz wars/i);
         expect(quizPage).toBeInTheDocument();
     })
 
