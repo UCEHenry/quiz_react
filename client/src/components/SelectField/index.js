@@ -20,7 +20,7 @@ export const SelectField = (props) => {
         break;
       case "Amount of Players":
         dispatch(amountOfPlayers(e.target.value));
-        dispatch(handlePlayerChange(e.target.value))
+        dispatch(handlePlayerChange(parseInt(e.target.value)))
         break;
       case "Username":
         dispatch(usernameInput(e.target.value));
