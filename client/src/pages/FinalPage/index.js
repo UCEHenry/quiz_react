@@ -16,8 +16,7 @@ export const FinalPage = () => {
     dispatch(handleScoreChange(0));
     dispatch(handleAmountChange(50));
     navigate("/settings");
-    sendFinalScores()
-    retrieveTopTen()
+
 
   };
 
@@ -32,15 +31,20 @@ export const FinalPage = () => {
 
     }
   }
+
   const retrieveTopTen = async () => {
     try{
       const resp = await axios.get('https://fpquizwar.herokuapp.com/users/topten')
-      console.log(resp)
+
     } catch (err) {
-      console.log(err)
+
     }
   }
 
+  useEffect(() => {
+    sendFinalScores()
+    retrieveTopTen()
+  }, [])
   return (
     <Box mt={30}>
       <Typography variant="h3" fontWeight="bold" mb={3}>
