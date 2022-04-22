@@ -33,7 +33,10 @@ export const handleScoreChange = payload => ({
     type: CHANGE_SCORE,
     payload,
 });
-
+export const handlePlayerChange = payload => ({
+    type: CHANGE_PLAYERS,
+    payload,
+});
 export const togglePlayerReady = playerId => ({type: 'TOGGLE_READY', payload: playerId})
 export const incrementPlayerPoints = playerId => ({type: 'INCREMENT_PLAYER_POINT', payload: playerId})
 export const selectAnswer = (playerId, answer) => ({type: 'SELECT_ANSWER', payload: playerId, answer:answer})

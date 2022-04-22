@@ -4,13 +4,12 @@ import { useDispatch } from "react-redux";
 import { selectAnswer } from "../../actions";
 import { decode } from "html-entities"
 import './style.css'
-
+import { QuestionButton } from "../QuestionButton";
 export const QuestionCard = ({ question, currentPlayerId }) => {
-    console.log(question, currentPlayerId)
     const dispatch = useDispatch()
-    const handleAnswerSelection = (id, answer) => {
-        dispatch(selectAnswer(id, answer))
-    }
+    // const handleAnswerSelection = (id, answer) => {
+    //     dispatch(selectAnswer(id, answer))
+    // }
     
     return (
 
@@ -20,7 +19,8 @@ export const QuestionCard = ({ question, currentPlayerId }) => {
                 <ListGroup>
                     {
                         question.answers.map(answer => (
-                            <Button onClick={()=>handleAnswerSelection(currentPlayerId, answer)} key={Math.random()} className="selected btn-secondary my-1 ">{answer}</Button>
+                            <QuestionButton key={Math.random()} answer={answer} playerId={currentPlayerId}/>
+                            // <Button onClick={()=>handleAnswerSelection(currentPlayerId, answer)} key={Math.random()} className="selected btn-secondary my-1 ">{answer}</Button>
                         ))
                     }
                 </ListGroup>

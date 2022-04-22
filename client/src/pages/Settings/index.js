@@ -13,7 +13,7 @@ export const Settings = () => {
   const { response, error, loading } = useAxios({ url: "/api_category.php" });
   const history = useNavigate();
   // const playerCount = useSelector((state) => state.amountOfPlayers)
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
   if (loading) {
     return (
       <Box mt={20}>
@@ -66,7 +66,7 @@ export const Settings = () => {
       <h1>Game Settings</h1>
         <div className="form-container">
           <SelectField options={localOrOnline} label="Local or Online" />
-          <SelectField options={amountOfPlayers} label="Amount of Players" onChange={(e) => {dispatch(amountOfPlayers(e.target.value))}}/>
+          <SelectField options={amountOfPlayers} label="Amount of Players" onChange={(e) => {dispatch(amOfPlyrs(e.target.value))}}/>
           <SelectField options={response.trivia_categories} label="Category" />
           <SelectField options={difficultyOptions} label="Difficulty" />
           <SelectField options={typeOptions} label="Type" />

@@ -14,7 +14,7 @@ export const QuizPage = () => {
     const players = useSelector(state => state.players)
     // Game state
     const gameState = useSelector(state => state.gameState)
-    const timer = 3
+    const timer = 60
     // Quiz settings
     const {
         question_category,
