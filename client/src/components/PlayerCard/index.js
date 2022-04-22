@@ -3,7 +3,7 @@ import React from 'react'
 import { Button, Card, Row } from 'react-bootstrap/'
 import { useSelector, useDispatch } from 'react-redux';
 import { togglePlayerReady } from "../../actions";
-
+import {UsernameComp} from '../UsernameComp'
 export const PlayerCard = ({ player, partyReady, currentPlayerId }) => {
 
     const dispatch = useDispatch()
@@ -20,17 +20,19 @@ export const PlayerCard = ({ player, partyReady, currentPlayerId }) => {
     }
 
     const highlightPlayer = () => {
-        const cardHighlight = '';
-        if (player.id === currentPlayerId) {
-            cardHighlight = 'border border-5 border-warning'
+
+        if (player.id === currentPlayerId && partyReady) {
+            return 'border border-5 border-warning w-75'
+        } else {
+            return 'w-50'
         }
-        return cardWidth
+
     }
 
     return (
-        <Card role={`PlayerCard_${player.name}`} id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className={`text-start ${highlightPlayer}`}>
+        <Card role={`PlayerCard_${player.name}`} id={`playerCardId_${player.id}`} style={{ width: '18rem' }} className={`text-start ${highlightPlayer()}`}>
 
-            <Card.Title>{player.name}</Card.Title>
+            {player.name =='' ?<Card.Title><UsernameComp playerId={player.id}/></Card.Title>:<Card.Title>{player.name}</Card.Title>}
             {partyReady ? <Card.Body role={`playerScore_${player.name}`}>{player.points}</Card.Body> : <Button role={`playerReadyButton_${player.name}`} className={readyButtonColour()} onClick={() => handleToggle(player.id)}>Readyup</Button>}
         </Card>
     )

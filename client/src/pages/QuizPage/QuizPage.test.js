@@ -12,9 +12,9 @@ describe('Quiz Page', () => {
         players: [
             {
                 id: 0,
-                name: 'Idris',
+                name: 'test',
                 points: 0,
-                isReady: true,
+                isReady: false,
                 selectedAnswer: ''
             },
         ],
@@ -44,7 +44,7 @@ describe('Quiz Page', () => {
     test('Render initial quiz page', async () => {
         // axiosMock.get.mockResolvedValueOnce(quizData)
         renderWithReduxProvider(<QuizPage />, { initState })
-        const quizPage = screen.getByText(/quiz page/i);
+        const quizPage = screen.getByText(/quiz wars/i);
         expect(quizPage).toBeInTheDocument();
     })
 
@@ -56,15 +56,21 @@ describe('Quiz Page', () => {
         expect(questionArea).toHaveTextContent('ready up')
 
     })
+    test('Render Time left', async ()=> {
+        renderWithReduxProvider(<QuizPage />, { initState })
+        const quizPage = screen.getByText(/Time left/i);
+        expect(quizPage).toBeInTheDocument();
+    })
 
     test('quizCard displays questions', async() => {
 
         // initState.players[0].isReady = false
-        renderWithReduxProvider(<QuizPage />, { initState })
-        console.log(initState)
-        userEvent.click(screen.getByRole(`PlayerElement_${initState.players[0].name}`))
-        const questionCard = await waitFor(() => screen.getByRole('questionCard'))
-        questionCard.toHaveTextContent('"Talos, the mythical giant bronze man, was the protector of which island?')
+        // renderWithReduxProvider(<QuizPage />, { initState })
+        // console.log(initState)
+        // const readybutton = await waitFor(screen.getByRole(`PlayerReadyButton_${initState.players[0].name}`))
+        // userEvent.click(readybutton)
+        // const questionCard = await waitFor(() => screen.getByRole('questionCard'))
+        // questionCard.toHaveTextContent('"Talos, the mythical giant bronze man, was the protector of which island?')
     })
 
 })

@@ -33,11 +33,14 @@ export const handleScoreChange = payload => ({
     type: CHANGE_SCORE,
     payload,
 });
-
+export const handlePlayerChange = payload => ({
+    type: CHANGE_PLAYERS,
+    payload,
+});
 export const togglePlayerReady = playerId => ({type: 'TOGGLE_READY', payload: playerId})
 export const incrementPlayerPoints = playerId => ({type: 'INCREMENT_PLAYER_POINT', payload: playerId})
 export const selectAnswer = (playerId, answer) => ({type: 'SELECT_ANSWER', payload: playerId, answer:answer})
 export const gameOver = () => ({type:'GAME_OVER'})
 export const amountOfPlayers = (amount) => ({type:'AMOUNT_OF_PLAYERS', payload: amount})
-export const usernameInput = (username) => ({type:'PLAYER_USERNAME', payload: username})
+export const usernameInput = (playerId, username) => ({type:'INPUT_USERNAME', payload: playerId, username:username})
 export const localOrOnline = (localOrOnline) => ({type:LOCAL_OR_ONLINE, payload: localOrOnline})

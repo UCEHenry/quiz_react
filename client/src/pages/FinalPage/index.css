@@ -1,0 +1,26 @@
+.leaderboard-bg{
+    background-image: linear-gradient(to bottom, rgb(121, 117, 117), rgba(208, 208, 208, 0)), url("https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: calc(100vh - 56px);
+}
+
+#finalscore{
+    padding: 20px;
+    color: white;
+}
+
+.table{
+    margin: 0 auto;
+    width: 50%;
+    margin-bottom: 1.875rem;
+}
+
+.table-bordered>:not(caption)>*{
+    border-width: 1px;
+}
+
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
+    background-color: aliceblue !important;
+}

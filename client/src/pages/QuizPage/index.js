@@ -14,20 +14,21 @@ export const QuizPage = () => {
     const players = useSelector(state => state.players)
     // Game state
     const gameState = useSelector(state => state.gameState)
-
+    const timer = 12
     // Quiz settings
     const {
         question_category,
         question_difficulty,
         question_type,
         amount_of_questions,
+        amount_of_players,
     } = useSelector((state) => state.settingsReducer);
 
     const [questionsLeft, setQuestionsLeft] = useState([])
     const [questionToAnswer, setQuestionToAnswer] = useState('')
     const [answerData, setAnswerData] = useState([])
     const [partyReady, setPartyReady] = useState(false)
-    const [displayTimer, setDisplayTimer] = useState(5)
+    const [displayTimer, setDisplayTimer] = useState(timer)
     const [currentPlayer, setCurrentPlayer] = useState(0)
 
     const dispatch = useDispatch()
@@ -71,7 +72,8 @@ export const QuizPage = () => {
     // Calls data from third party quiz api
     const getQuestions = async (question_category, question_difficulty, question_type, amount_of_questions) => {
         try {
-            let apiUrl = `/api.php?amount=${amount_of_questions}`;
+            const numOfQuestions = amount_of_questions*amount_of_players
+            let apiUrl = `/api.php?amount=${numOfQuestions}`;
             if (question_category) {
                 apiUrl = apiUrl.concat(`&category=${question_category}`)
             }
@@ -111,14 +113,7 @@ export const QuizPage = () => {
             } else {
                 console.log('oops')
             }
-        // for (const player of players) {
-        //     if (player.selectedAnswer === correctAnswer.answers) {
-        //         console.log("score!: ", player.id)
-        //         dispatch(incrementPlayerPoints(player.id))
-        //     } else {
-        //         console.log('oops')
-        //     }
-        // }
+
     };
     const nextQuestion = () => {
         console.log(`question:${questionToAnswer.id + 1}/${questionsLeft.length}`)
@@ -164,7 +159,7 @@ export const QuizPage = () => {
             const dealWithResultsTimer = setTimeout(()=>{
                 handleClickAnswer()
                 nextQuestion()
-                setDisplayTimer(5)
+                setDisplayTimer(timer)
             }, 5000)
             return ()=> clearTimeout(dealWithResultsTimer)
             
@@ -183,7 +178,7 @@ export const QuizPage = () => {
     return (
         <div className='section-background'>
             <section id='Quiz Page' className='container' >
-                <h1 id="quiz-title">Quiz Game</h1>
+                <h1 id="quiz-title">Quiz Wars</h1>
                 <h2>Time left: {displayTimer}</h2>
                 <Row>
                     <Col>

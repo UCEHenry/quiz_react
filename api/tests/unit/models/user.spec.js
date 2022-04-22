@@ -10,11 +10,20 @@ describe('User', () => {
     afterAll(() => jest.resetAllMocks())
 
     describe('all', () => {
-        test('it resolves with authors on successful db query', async () => {
+        test('it resolves with users on successful db query', async () => {
             jest.spyOn(db, 'query')
                 .mockResolvedValueOnce({ rows: [{}, {}, {}]});
             const all = await User.all;
             expect(all).toHaveLength(3)
+        })
+    });
+    
+    describe('usersTopTen', () => {
+        test('it resolves with users on successful db query', async () => {
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [{}, {}, {}]});
+            const topTen = await User.usersTopTen;
+            expect(topTen).toHaveLength(3)
         })
     });
 

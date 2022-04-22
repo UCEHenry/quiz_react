@@ -3,33 +3,69 @@ import { Box } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
 import { handleAmountChange, handleScoreChange } from "../../actions";
+import { Leaderboard } from "../../components/Leaderboard"
+import { FinalScore } from "../../components/FinalScore";
+
 import React from 'react';
+import axios from 'axios'
+import "./index.css"
 
 export const FinalPage = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { score } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const players = useSelector((state) => state.players);
+  const [topTen, setTopTen] = useState([])
+  const handleBackToSettings = () => {
+    dispatch(handleScoreChange(0));
+    dispatch(handleAmountChange(50));
+    navigate("/settings");
 
-    const handleBackToSettings = () => {
-        dispatch(handleScoreChange(0));
-        dispatch(handleAmountChange(50));
-        navigate("/settings");
-      };
 
+  };
 
-      return (
-        <Box mt={30}>
-          <Typography variant="h3" fontWeight="bold" mb={3}>
-            Final Score {score}
-          </Typography>
-          <Button onClick={handleBackToSettings} variant="outlined">
-            Back to Settings!
-          </Button>
-        </Box>
-      );
-    };
-    
+  const sendFinalScores = async () => {
+    try {
+      for (player of players) {
+        await axios.patch('https://fpquizwar.herokuapp.com/users', { username: player.name, score: player.points })
+      }
+      const resp = await axios.get('https://fpquizwar.herokuapp.com/users')
+      return resp.data;
+      
+    } catch (err) {
+
+    }
+  }
+
+  const retrieveTopTen = async () => {
+    try {
+      const resp = await axios.get('https://fpquizwar.herokuapp.com/users/topten')
+      setTopTen(resp.data)
+    } catch (err) {
+
+    }
+  }
+
+  useEffect(() => {
+    sendFinalScores()
+    retrieveTopTen()
+  }, [])
+
+  return (
+    <div className="leaderboard-bg">
+        <h3 id="finalscore">Final Score</h3>
+        <FinalScore players={players}  />
+        <hr></hr>
+        <h3 id="finalscore">Leaderboard</h3>
+        <Leaderboard topTen={topTen} />
+        <Button onClick={handleBackToSettings} className="button-bg" variant="outlined">
+          Back to Settings! 
+        </Button>
+    </div>
+  );
+};
+
     //export default FinalPage;
 
 

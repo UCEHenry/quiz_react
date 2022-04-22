@@ -12,12 +12,17 @@ body{
 
 .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root, .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root, .css-q8hpuo-MuiFormControl-root  {
     width: 300px  !important;
+    background-color: bisque;
+    border-radius: 4px;
 }
 
 .css-hj1buz{
     margin: 20px auto;
     width: 200px !important;
+    
 }
+
+
 
 .background-color{
 height: calc(100vh - 56px);

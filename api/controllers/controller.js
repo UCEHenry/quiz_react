@@ -40,5 +40,14 @@ async function updateScore(req, res) {
     }
 }
 
+async function topTen(req, res) {
+    try{
+        const topTen = await User.usersTopTen
+        res.status(200).json(topTen)
+    } catch (err) {
+        res.status(404).json({err})
+    }
+}
 
-module.exports = { getAll, createNewUser, getUser, updateScore }
+
+module.exports = { getAll, createNewUser, getUser, updateScore, topTen }

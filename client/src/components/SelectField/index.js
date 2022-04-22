@@ -2,7 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { handleCategoryChange, handleDifficultyChange, handleTypeChange, localOrOnline, usernameInput } from "../../actions";
+import { amountOfPlayers, handleAmountChange, handleCategoryChange, handleDifficultyChange, handlePlayerChange, handleTypeChange, localOrOnline, usernameInput } from "../../actions";
 
 export const SelectField = (props) => {
   const { label, options } = props;
@@ -19,7 +19,8 @@ export const SelectField = (props) => {
         dispatch(localOrOnline(e.target.value));
         break;
       case "Amount of Players":
-        dispatch(handleCategoryChange(e.target.value));
+        dispatch(amountOfPlayers(e.target.value));
+        dispatch(handlePlayerChange(parseInt(e.target.value)))
         break;
       case "Username":
         dispatch(usernameInput(e.target.value));

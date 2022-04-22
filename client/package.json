@@ -39,7 +39,12 @@
     },
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/actions/"
+      "/actions/",
+      "components/index.js",
+      "pages/index.js",
+      "layout/index.js",
+      "reducers/",
+      "app.js"
     ]
   },
   "browserslist": {
