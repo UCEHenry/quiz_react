@@ -1,16 +1,15 @@
 # Quiz War App
-Knowledge is Power
 
 # Table of Contents
-    - Purpose of our App
-    - Installation & Usage
-    - Deployment
-    - Technologies 
-    - Database Schema
-    - Routes
-    - Test Coverage
-    - Wins & Challenges
-    - Future Features & What We've Learned 
+- Purpose of our App
+- Installation & Usage
+- Deployment
+- Technologies 
+- Database Schema
+- Routes
+- Test Coverage
+- Wins & Challenges
+- Future Features & What We've Learned 
 
 ## **Purpose of our App**
 
@@ -26,34 +25,34 @@ The game will show the score for each player even when the questions are display
 ## **Installation and Usage**
 
 #### Installation
-      - Clone the repo to yor local machine
-      - Open the terminal and navigate to `quiz_react`
+- Clone the repo to yor local machine
+- Open the terminal and navigate to `quiz_react`
 
 #### Local Usage
-      - Navigate to the `client` folder
-      - Run `npm install` to install dependencies
-      - Run `npm run dev`
-      - If browser does not open and display the app automatically, open the browser 
+- Navigate to the `client` folder
+- Run `npm install` to install dependencies
+- Run `npm run dev`
+- If browser does not open and display the app automatically, open the browser 
 
 ## **Deployment**
 
 
 ## **Technologies**
-#### Front End
-    - [React](https://reactjs.org/)
-    - [Redux](https://redux.js.org/)
-    - [Node.js](https://nodejs.org/)
-    - [Jest](https://jestjs.io/)
-    - [Docker](https://docker.com/)
-    - [Netlify](https://www.netlify.com/)
-    - [MUI](https://mui.com/)
+### Front End
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [Node.js](https://nodejs.org/)
+- [Jest](https://jestjs.io/)
+- [Docker](https://docker.com/)
+- [Netlify](https://www.netlify.com/)
+- [MUI](https://mui.com/)
 
-  #### Back End
-    - [Express](https://expressjs.com/)
-    - [Jest](https://jestjs.io/)
-    - [PostgreSQL](https://www.postgresql.org/)
-    - [Heroku](https://www.heroku.com/)
-    - [Netlify](https://www.netlify.com/)
+### Back End
+- [Express](https://expressjs.com/)
+- [Jest](https://jestjs.io/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Heroku](https://www.heroku.com/)
+ - [Netlify](https://www.netlify.com/)
 
 ## **Database Schema**
 
