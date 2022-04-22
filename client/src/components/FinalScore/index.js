@@ -1,9 +1,8 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
 import './style.css'
 import { Table } from 'react-bootstrap'
 
-export const Leaderboard = ({topTen}) => {
+export const FinalScore = ({players}) => {
     return (
 
         <div >
@@ -17,11 +16,11 @@ export const Leaderboard = ({topTen}) => {
                 </thead>
                 <tbody>
                     {
-                        topTen.map(player=> (
+                        players.map(player=> (
                             <tr>
-                                <td>{topTen.indexOf(player)+1}</td>
-                                <td>{player.username}</td>
-                                <td>{player.score}</td>
+                                <td>{players.indexOf(player)+1}</td>
+                                <td>{player.name}</td>
+                                <td>{player.points}</td>
                             </tr>
                         ))
                     }

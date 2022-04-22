@@ -5,7 +5,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { handleAmountChange, handleScoreChange } from "../../actions";
-import { Leaderboard } from "../../components/Leaderboard/index"
+import { Leaderboard } from "../../components/Leaderboard"
+import { FinalScore } from "../../components/FinalScore";
+
 import React from 'react';
 import axios from 'axios'
 import "./index.css"
@@ -29,7 +31,8 @@ export const FinalPage = () => {
         await axios.patch('https://fpquizwar.herokuapp.com/users', { username: player.name, score: player.points })
       }
       const resp = await axios.get('https://fpquizwar.herokuapp.com/users')
-      return resp.data
+      return resp.data;
+      
     } catch (err) {
 
     }
@@ -49,12 +52,12 @@ export const FinalPage = () => {
     retrieveTopTen()
   }, [])
 
-  
   return (
     <div className="leaderboard-bg">
         <h3 id="finalscore">Final Score</h3>
-        {players[0].points}
-        
+        <FinalScore players={players}  />
+        <hr></hr>
+        <h3 id="finalscore">Leaderboard</h3>
         <Leaderboard topTen={topTen} />
         <Button onClick={handleBackToSettings} className="button-bg" variant="outlined">
           Back to Settings! 
