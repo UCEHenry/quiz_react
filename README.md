@@ -12,7 +12,7 @@ Knowledge is Power
     - Wins & Challenges
     - Future Features & What We've Learned 
 
-## Purpose of our App
+## **Purpose of our App**
 
 #### What is Quiz War?
 Quiz War is a quiz game that allows you to test your knowledge and compete either on the same side or against your friends. 
@@ -23,7 +23,7 @@ The game allows you to create a game of up to four players, choose among 24 cate
 #### Get Motivated! 
 The game will show the score for each player even when the questions are displayed to create an extra layer of competitiveness, which will motivate you to play the game in Single Mode to get better.  
 
-## Installation and Usage
+## **Installation and Usage**
 
 #### Installation
       - Clone the repo to yor local machine
@@ -35,10 +35,10 @@ The game will show the score for each player even when the questions are display
       - Run `npm run dev`
       - If browser does not open and display the app automatically, open the browser 
 
-## Deployment 
+## **Deployment**
 
 
-## Technologies
+## **Technologies**
 #### Front End
     - [React](https://reactjs.org/)
     - [Redux](https://redux.js.org/)
@@ -55,12 +55,10 @@ The game will show the score for each player even when the questions are display
     - [Heroku](https://www.heroku.com/)
     - [Netlify](https://www.netlify.com/)
 
+## **Database Schema**
 
+## **Routes**
 
-## Database Schema
+## **Test Coverage**
 
-## Routes
-
-## Test Coverage
-
-## Wins & Challenges
+## **Wins & Challenges**
