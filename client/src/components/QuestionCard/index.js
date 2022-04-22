@@ -3,7 +3,7 @@ import { Button, Card, ListGroup, } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { selectAnswer } from "../../actions";
 import { decode } from "html-entities"
-
+import './style.css'
 
 export const QuestionCard = ({ question, currentPlayerId }) => {
     console.log(question, currentPlayerId)
@@ -20,7 +20,7 @@ export const QuestionCard = ({ question, currentPlayerId }) => {
                 <ListGroup>
                     {
                         question.answers.map(answer => (
-                            <Button onClick={()=>handleAnswerSelection(currentPlayerId, answer)} key={Math.random()} className="btn-secondary my-1">{answer}</Button>
+                            <Button onClick={()=>handleAnswerSelection(currentPlayerId, answer)} key={Math.random()} className="selected btn-secondary my-1 ">{answer}</Button>
                         ))
                     }
                 </ListGroup>
