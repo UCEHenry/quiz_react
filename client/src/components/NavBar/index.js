@@ -11,7 +11,7 @@ export const NavBar = () => {
                     <Nav className="me-auto">
                         <Nav.Link href='/'>Home</Nav.Link>
                         <Nav.Link href='/settings'>Play</Nav.Link>
-                        <Nav.Link href="#">Leaderboard</Nav.Link>
+                        <Nav.Link href="/#">Leaderboard</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

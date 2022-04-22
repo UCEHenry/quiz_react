@@ -3,9 +3,12 @@ import { Box } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 import { handleAmountChange, handleScoreChange } from "../../actions";
+import { Leaderboard } from "../../components/Leaderboard/index"
 import React from 'react';
 import axios from 'axios'
+import "./index.css"
 
 export const FinalPage = () => {
   const dispatch = useDispatch();
@@ -21,9 +24,9 @@ export const FinalPage = () => {
   };
 
   const sendFinalScores = async () => {
-    try{
+    try {
       for (player of players) {
-        await axios.patch('https://fpquizwar.herokuapp.com/users', {username:player.name, score: player.points})
+        await axios.patch('https://fpquizwar.herokuapp.com/users', { username: player.name, score: player.points })
       }
       const resp = await axios.get('https://fpquizwar.herokuapp.com/users')
       return resp.data
@@ -33,7 +36,7 @@ export const FinalPage = () => {
   }
 
   const retrieveTopTen = async () => {
-    try{
+    try {
       const resp = await axios.get('https://fpquizwar.herokuapp.com/users/topten')
 
     } catch (err) {
@@ -45,15 +48,16 @@ export const FinalPage = () => {
     sendFinalScores()
     retrieveTopTen()
   }, [])
+
+  
   return (
-    <Box mt={30}>
-      <Typography variant="h3" fontWeight="bold" mb={3}>
-        Final Score
-      </Typography>
-      <Button onClick={handleBackToSettings} variant="outlined">
-        Back to Settings!
-      </Button>
-    </Box>
+    <div className="leaderboard-bg">
+        <h3 id="finalscore">Final Score</h3>
+        <Leaderboard />
+        <Button onClick={handleBackToSettings} className="button-bg" variant="outlined">
+          Back to Settings! 
+        </Button>
+    </div>
   );
 };
 
