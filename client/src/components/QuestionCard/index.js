@@ -6,6 +6,7 @@ import { decode } from "html-entities"
 
 
 export const QuestionCard = ({ question, currentPlayerId }) => {
+    console.log(question, currentPlayerId)
     const dispatch = useDispatch()
     const handleAnswerSelection = (id, answer) => {
         dispatch(selectAnswer(id, answer))

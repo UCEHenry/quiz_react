@@ -43,7 +43,8 @@
       "components/index.js",
       "pages/index.js",
       "layout/index.js",
-      "reducers/"
+      "reducers/",
+      "app.js"
     ]
   },
   "browserslist": {

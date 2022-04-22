@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { handleAmountChange, handleScoreChange } from "../../actions";
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios'
 
 export const FinalPage = () => {
