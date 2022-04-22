@@ -51,4 +51,10 @@ describe('user endpoints', () => {
         expect(userRes.statusCode).toEqual(200);
         expect(userRes.body.score).toEqual(9000);
     });
+    
+    it('should return a descending list of top ten users in database ny score', async () => {
+        const res = await request(api).get('/topten');
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.length).toEqual(3);
+    });
 })
