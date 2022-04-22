@@ -14,7 +14,7 @@ export const QuizPage = () => {
     const players = useSelector(state => state.players)
     // Game state
     const gameState = useSelector(state => state.gameState)
-    const timer = 60
+    const timer = 12
     // Quiz settings
     const {
         question_category,
@@ -72,9 +72,8 @@ export const QuizPage = () => {
     // Calls data from third party quiz api
     const getQuestions = async (question_category, question_difficulty, question_type, amount_of_questions) => {
         try {
-            console.log(amount_of_questions)
-            console.log(amount_of_players)
-            let apiUrl = `/api.php?amount=${amount_of_questions}`;
+            const numOfQuestions = amount_of_questions*amount_of_players
+            let apiUrl = `/api.php?amount=${numOfQuestions}`;
             if (question_category) {
                 apiUrl = apiUrl.concat(`&category=${question_category}`)
             }
