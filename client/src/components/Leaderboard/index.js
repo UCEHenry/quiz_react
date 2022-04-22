@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import './style.css'
 import { Table } from 'react-bootstrap'
 
-export const Leaderboard = () => {
+export const Leaderboard = ({topTen}) => {
     return (
 
         <div >
@@ -17,11 +17,15 @@ export const Leaderboard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>10</td>
-                    </tr>
+                    {
+                        topTen.map(player=> (
+                            <tr>
+                                <td>{topTen.indexOf(player)+1}</td>
+                                <td>{player.username}</td>
+                                <td>{player.score}</td>
+                            </tr>
+                        ))
+                    }
                 </tbody>
             </Table>
         </div>

@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { handleAmountChange, handleScoreChange } from "../../actions";
 import { Leaderboard } from "../../components/Leaderboard/index"
 import React from 'react';
@@ -14,7 +14,7 @@ export const FinalPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const players = useSelector((state) => state.players);
-
+  const [topTen, setTopTen] = useState([])
   const handleBackToSettings = () => {
     dispatch(handleScoreChange(0));
     dispatch(handleAmountChange(50));
@@ -38,7 +38,7 @@ export const FinalPage = () => {
   const retrieveTopTen = async () => {
     try {
       const resp = await axios.get('https://fpquizwar.herokuapp.com/users/topten')
-
+      setTopTen(resp.data)
     } catch (err) {
 
     }
@@ -53,7 +53,9 @@ export const FinalPage = () => {
   return (
     <div className="leaderboard-bg">
         <h3 id="finalscore">Final Score</h3>
-        <Leaderboard />
+        {players[0].points}
+        
+        <Leaderboard topTen={topTen} />
         <Button onClick={handleBackToSettings} className="button-bg" variant="outlined">
           Back to Settings! 
         </Button>
