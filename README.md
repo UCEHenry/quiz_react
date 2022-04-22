@@ -40,19 +40,21 @@ The game will show the score for each player even when the questions are display
 
 ## Technologies
 #### Front End
-    - React
-    - Redux
-    - Jest
-    - Docker
-    - Netlify
-    - MUI
+    - [React](https://reactjs.org/)
+    - [Redux](https://redux.js.org/)
+    - [Node.js](https://nodejs.org/)
+    - [Jest](https://jestjs.io/)
+    - [Docker](https://docker.com/)
+    - [Netlify](https://www.netlify.com/)
+    - [MUI](https://mui.com/)
 
   #### Back End
-    - Express
-    - Jest
-    - PostgreSQL
-    - Heroku
-    - Netlify
+    - [Express](https://expressjs.com/)
+    - [Jest](https://jestjs.io/)
+    - [PostgreSQL](https://www.postgresql.org/)
+    - [Heroku](https://www.heroku.com/)
+    - [Netlify](https://www.netlify.com/)
+
 
 
 ## Database Schema
