@@ -35,7 +35,10 @@ The game will show the score for each player even when the questions are display
 - If browser does not open and display the app automatically, open the browser 
 
 ## **Deployment**
-
+### Front End
+[Hosted on Netlify](https://fp-habits.netlify.app/](https://quiz-war.netlify.app/)
+### Back End
+Hosted on Heroku
 
 ## **Technologies**
 ### Front End
@@ -54,10 +57,14 @@ The game will show the score for each player even when the questions are display
 - [Heroku](https://www.heroku.com/)
  - [Netlify](https://www.netlify.com/)
 
-## **Database Schema**
-
 ## **Routes**
+- **'/toptep'** - *Retreives the top ten players with the highest score*
 
 ## **Test Coverage**
+- Back end = 85%
+- Front end = 53% 
 
-## **Wins & Challenges**
+
+## Future Features
+- User accounts to track player's personal score
+- Update for remote play (sockets)
